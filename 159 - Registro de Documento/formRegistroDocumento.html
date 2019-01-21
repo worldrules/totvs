@@ -1,0 +1,107 @@
+<html>
+	<head>
+		<!-- <script language="javascript" type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+		<script language="javascript" type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+		<script language="javascript" type="text/javascript" src="js/bootstrap.min.js"></script> -->
+		
+	<link type="text/css" rel="stylesheet" href="http://201.86.212.22:8180/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="http://201.86.212.22:8180/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="http://201.86.212.22:8180/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="http://201.86.212.22:8180/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="http://201.86.212.22:8180/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+		<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="custom.js"></script>					
+		<!--<script language="javascript" type="text/javascript" src="/kitecm/js/brava.js"></script>-->
+		<!-- 
+		<link rel="stylesheet" type="text/css" href="/kitecm/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/custom.css"/>  -->   
+	</head>
+	<body id="KitGestaoQualidade" onload="window.parent.document.getElementById('workflowView-cardViewer').style.border='none'; init()">
+		<div class="fluig-style-guide">
+	    	<div id="logo">
+				<img src="img/fluig.png" width="83px" height="83px">
+			</div>
+			<h2 style="padding-bottom: 20px !important">i18n.translate("titulo")</h2>
+			<form name="formRD" id="formRD" action="" method="post" class="form-horizontal">
+				<fieldset>
+			  		<legend>i18n.translate("legend_info_geral")</legend>
+				  	<div class="form-group">
+				    	<label for="nmMatricSolicitante" class="col-sm-2 control-label">i18n.translate("matri_resp")</label>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmMatricSolicitante" id="nmMatricSolicitante" readonly="true">
+				    	</div>
+				    	<label for="dtData" class="col-sm-1 control-label">i18n.translate("data_solic")</label>
+				    	<div class="col-sm-3">
+				      		<input type="text" class="form-control" name="dtData" id="dtData" readonly="true">
+				    	</div>
+				    </div>
+				    <div class="form-group">
+				    	<label for="nmSolicitante" class="col-sm-2 control-label">i18n.translate("resp")</label>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmSolicitante" id="nmSolicitante" readonly="true">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+						<label for="fgFoodStamps" class="col-sm-2 control-label">i18n.translate("tipo_solic")</label>
+						<div class="col-sm-8">
+						<label class="radio-inline"> 
+							<input type="radio" name="fgTipoSolicitacao" id="fgTipoSolicElab" value="fgTipoSolicElab" onclick="$('#div_revisar').hide();">i18n.translate("tp_elaborar")<br> 
+							<input type="radio" name="fgTipoSolicitacao" id="fgTipoSolicRevis" value="fgTipoSolicRevis" onclick="$('#div_revisar').show();">i18n.translate("tp_revisar") <br>
+						</div>
+					</div>
+					<div class="form-group">
+				    	<label for="dsMotivo" class="col-sm-2 control-label">i18n.translate("motivo")</label>
+				    	<div class="col-sm-5">
+				      		<textarea class="form-control" rows="3" cols="5" id="dsMotivo" name="dsMotivo"></textarea>
+				    	</div>
+				  	</div>
+				  	<div id="div_revisar" style="display:none">
+				  	<div class="form-group" id="rev_doc">
+				    	<label for="nmDocumento" class="col-sm-2 control-label">i18n.translate("Documento")</label>
+				    	<div class="col-sm-2">
+				      		<input type="text" class="form-control" name="documentCod" id="documentCod" readonly="true">
+				    	</div>
+				    	<div class="input-group col-sm-5" style="padding-left: 15px !important;">
+				      		<input type="zoom" class="form-control" name="nmDocumento" id="nmDocumento"
+						        		data-zoom="{'datasetId':'document',
+	                                        'displayKey':'documentDescription',
+	                                        'fields':[ { 'field':'documentId','label':'Código'},{ 'field':'documentDescription','label':'Descrição','standard':'true', 'search':'true'},{ 'field':'version', 'label':'Versão'}
+	                                                 ]}"/>
+				      		
+				    	</div>
+				  	</div>
+				  	<div class="form-group" id="rev_doc_ver">
+				    	<label for="nmVersao" class="col-sm-2 control-label">i18n.translate("versao")</label>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmVersao" id="nmVersao" readonly="true">
+				    	</div>
+				  	</div>
+				  	</div>
+				  	<div class="form-group">
+				  		<label class="col-sm-2 control-label"></label>
+						<div class="checkbox col-sm-3">
+							<label for="fgNecessitaCapacit">
+						    	<input type="checkbox" name="fgNecessitaCapacit" id="fgNecessitaCapacit"> 
+						    	i18n.translate("capacitar")
+						    </label>
+					    </div>
+						<div class="checkbox col-sm-4">
+							<label for="fgDistCopControl">
+						    	<input type="checkbox" name="fgDistCopControl" id="fgDistCopControl"> 
+						    	i18n.translate("copia_contr")
+						    </label>
+					    </div>
+					</div>
+				  	<div class="form-group">
+				    	<label for="dsComentTriagem" class="col-sm-2 control-label">i18n.translate("triagem")</label>
+				    	<div class="col-sm-5">
+				      		<textarea class="form-control" rows="3" cols="5" id="dsComentTriagem" name="dsComentTriagem"></textarea>
+				    	</div>
+				  	</div>
+				</fieldset>
+			</form>
+		<div>
+	</body>
+</html>

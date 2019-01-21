@@ -1,0 +1,134 @@
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>Registro de Ocorrência</title>
+<!-- ------------------------------------------------------------------------------------ -->
+<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+
+	</head>
+
+	<div class="fluig-style-guide">
+			<body id="bodyChamados" onload="window.parent.document.getElementById('workflowView-cardViewer').style.border='none';">
+				<div class="container">
+					<div class="row">
+						<div class="col-md-10 col-md-push-0 col-xs-10 col-xs-push-2">
+							<h2 style="padding-bottom: 20px !important">Registro de Chamados</h2>
+						</div>
+					</div>
+					<form name="form" id="formChamados" action="" method="post" role="form" class="form-horizontal">
+						<fieldset>
+							<legend>Registro</legend>
+							<div class="form-group" style="margin-left: 10px !important;">
+								<label for="nrChamado" class="col-sm-2 control-label">Nr Chamado</label>
+								<div class="col-sm-3" >
+									<input type="text" class="form-control" id="nrChamado" name="nrChamado" readonly="true">
+								</div>
+
+								<label for="solicitante" class="col-sm-2 control-label">Solicitante</label>
+								<div class="col-sm-3">
+									<input type="text" class="form-control" id="solicitante" name="solicitante" readonly="true">
+								</div>
+							</div>
+							<!-- Divisoria -->
+
+
+
+
+
+
+
+
+
+							<div class="form-group">
+									<label for="dtRegistro" class="col-sm-2 control-label">i18n.translate("data_reg")</label>
+								<div class="col-sm-3">
+										<input type="text" class="form-control" id="dtRegistro" name="dtRegistro" readonly="true">
+								</div>
+								<label for="dtOcorrencia" class="col-sm-2 control-label">i18n.translate("data_oco")</label>
+								<div class="input-group col-sm-3" style="padding-left: 15px !important;">
+										<input id="dtOcorrencia" name="dtOcorrencia" class="form-control" type="text" readonly="true" />
+										<a style="width: 10px !important;" href="#" class="input-group-addon" id="btCalendar" name="btCalendar" title="Selecionar data" onclick="displayDatePicker(dtOcorrencia, 'dmy');"><i class="glyphicon glyphicon-calendar"></i></a>
+										<a style="width: 10px !important;" href="#" class="input-group-addon" id="clearDateOccurrence" name="clearDateOccurrence" title="Limpar" onClick="clearField('dtOcorrencia')"><i class="glyphicon glyphicon-remove"></i></a>
+								</div>
+								</div>
+						</fieldset>
+					</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+				</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+			</body>
+		</div>
+	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

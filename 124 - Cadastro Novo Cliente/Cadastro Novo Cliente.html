@@ -1,0 +1,213 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css" />
+	<script type="text/javascript"	src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript"	src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript"	src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript"	src="/portal/resources/style-guide/js/fluig-style-guide.min.js"	charset="utf-8"></script>
+
+	<script	src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+</head>
+<body>
+
+	<style>
+.obrigatorio {
+	color: red;
+}
+</style>
+
+	<div class="fluig-style-guide">
+		<form name="form" role="form">
+			<!-- CADASTRO DE NOVO CLIENTE -->
+			<div class="panel panel-primary" id="cadCliente">
+				<div class="panel-heading">
+					<h3 class="panel-title">CADASTRO DE NOVO CLIENTE</h3>
+				</div>
+				<div class="panel-body">									
+					<div class="row">
+						<div class="form-group col-md-12">
+							<div class="row">
+								<div class="form-group col-md-6">
+									<label for="nomeCadCli2">Nome do Cliente<span class="obrigatorio" > *</span></label>
+									<input type="text" name="nomeCadCli2" id="nomeCadCli2" onfocusout="altera();" class="form-control nomeCadCli2">									
+								</div>
+								<div class="form-group col-md-6" >
+									<label for="novoContato">Adicionar campos</label>	</br>				
+									<span class="fluigicon fluigicon-plus-sign fluigicon-lg" id="addOrcamento" alt='adicionar_linha' title='Adicionar Campos' style="cursor: pointer;" onclick="addTask();"></span>									
+								</div>	
+							</div>																				
+							<table  tablename="listaAtividade" id="listaAtividade" noaddbutton="true" nodeletebutton="true" colspan="1" class="table table-condensed table-striped" >
+								<thead>
+									<tr>
+										<th class="text-left">
+										</th>																			
+										<th class="text-left" >											
+										</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>									
+										<td style="width:100%">
+											<div class="row">
+												<div class="form-group col-md-3">
+													<label for="contatoCadCli">Contato do Cliente<span class="obrigatorio" > *</span></label>
+													<input type="text" name="contatoCadCli" id="contatoCadCli" class="form-control contatoCadCli" >													
+												</div>
+												<div class="form-group col-md-3">
+													<label for="contatoCadEmp">Empresa<span class="obrigatorio" > *</span></label>
+													<input type="text" name="contatoCadEmp" id="contatoCadEmp" class="form-control contatoCadEmp" >
+												</div>
+												<div class="form-group col-md-3">
+													<label for="contatoCadTel">Telefone<span class="obrigatorio" > *</span></label>
+													<input type="text" name="contatoCadTel" id="contatoCadTel" class="form-control contatoCadTel" >
+												</div>
+												<div class="form-group col-md-3">
+													<label for="contatoCadEmail">E-mail<span class="obrigatorio" > *</span></label>
+													<input type="text" name="contatoCadEmail" id="contatoCadEmail" class="form-control contatoCadEmail" >
+												</div>
+											</div>
+											<div class="row">	
+												<div class="form-group col-md-3">
+													<label for="contatoCadCliTec">Contato Técnico</label>
+													<input type="text" name="contatoCadCliTec" id="contatoCadCliTec" class="form-control contatoCadCliTec" >
+												</div>
+												<div class="form-group col-md-3">
+													<label for="contatoCadCliFin">Contato Financeiro</label>
+													<input type="text" name="contatoCadCliFin" id="contatoCadCliFin" class="form-control contatoCadCliFin" >
+												</div>
+												<div class="form-group col-md-3">
+													<label for="contatoCadCliCom">Contato Comercial</label>
+													<input type="text" name="contatoCadCliCom" id="contatoCadCliCom" class="form-control contatoCadCliCom" >
+												</div>
+												<div class="form-group col-md-3">													
+													<input type="hidden" name="nomeCadCli" id="nomeCadCli" class="form-control nomeCadCli"  >
+												</div>
+											</div>
+																																	
+										</td>
+										<td class="text-right" style="width:7%">
+											<span class="fluigicon fluigicon-minus-sign fluigicon-lg" id="removeOrcamento" alt='remover_linha' title='Remover Campos' onclick="fnCustomDelete(this)" style="cursor: pointer;" ></span>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>				
+					</div>	
+				</div>
+			</div>
+			<!-- CADASTRO DE NOVO CLIENTE -->
+		</form>
+	</div>
+</body>
+<script>
+function addTask() { 
+	row = wdkAddChild('listaAtividade');			
+}
+
+function fnCustomDelete(oElement){ 
+	// Chamada a funcao padrao, NAO RETIRAR    
+	fnWdkRemoveChild(oElement);
+	totalizaValor(); 
+}
+</script>
+
+
+<!-- FUNCAO PARA PASSAR O VALOR DO CAMPO nomeCadCli2 PARA nomeCadCli (HIDDEN) pela classe (nomeCadCli)-->
+<script>
+function altera(){
+var list = document.getElementsByClassName('nomeCadCli');
+var n;
+var nomeCadCliValor = document.getElementById("nomeCadCli2").value; 
+	for (n = 0; n < list.length; ++n) {
+		list[n].value=nomeCadCliValor;	
+	}
+}
+</script>
+
+<!-- FUNCAO AUTOCOMPLETAR O CAMPO COM OS REGISTROS DO DATASET -->
+<script>
+$(document).ready(function() {
+	var clientes = []; 
+	
+	////////////////////////// SETA O DATASET A SER CONSULTADO (EX: dsNovoCliente) E PASSA OS VALORES PARA UM VETOR (ARRAY) /////////////////////////
+    var datasetReturned = DatasetFactory.getDataset("dsNovoCliente", null, null, null);   
+        var records = datasetReturned.values;
+        for ( var index in records) {
+            var record = records[index];
+            
+            /////////  PEGA OS VALORES DOS CAMPOS nomeCadCli2  ///////////////////
+			var valor = record.nomeCadCli2;
+			//////////  INSERE OS VALORES NO ARRAY  ////////////////
+			
+			// Se já tiver nome no array de clientes ele remove
+				if(clientes.indexOf(valor) > -1) {
+					clientes.splice($.inArray(valor, clientes),1);
+					//alert("removido")
+				}  else {
+					//alert("n encontrou")		
+				}
+			
+				clientes.push(valor);           
+        }
+	//não apagar , sério
+    window.clientes = clientes
+        
+	console.log("clientes: "+clientes);
+	console.log("valor:" +valor);
+	console.log("record:" +record);
+	/////////////////  SELECIONA O CAMPO QUE IRÃ� AUTOCOMPLETAR, PEGANDO PELO ID (EX: #nomeCadCli2)  ///////////////////////
+    var myAutocomplete = FLUIGC.autocomplete('#nomeCadCli2', {
+		source: substringMatcher(clientes),
+			name: 'cities',
+			displayKey: 'description',
+			tagClass: 'tag-gray',
+			type: 'autocomplete'
+	});
+	
+	//ao digitar cliente , verifica se já existe
+	$('#nomeCadCli2').focusout(function(){
+		var cliente = $('#nomeCadCli2').val();
+		if($.inArray(cliente,window.clientes) != -1){
+			
+			// alert("O cliente já foi inserido anteriormente !");
+			$("#addOrcamento").hide();
+			$("#nomeCadCli2").empty();
+			
+			
+			FLUIGC.toast({
+					title: 'Atenção:',
+					message: 'O cliente já foi inserido anteriormente !',
+					type: 'danger'			
+		});
+			setInterval(function(){ 
+			location.reload();
+			}, 3000);
+
+		} else {
+			$("#addOrcamento").show();
+		}
+	})
+});
+ 
+
+
+ 
+function substringMatcher(strs) {
+    return function findMatches(q, cb) {
+        var matches, substrRegex; 
+        matches = []; 
+        substrRegex = new RegExp(q, 'i'); 
+        $.each(strs, function(i, str) {
+            if (substrRegex.test(str)) {
+                matches.push({
+                    description: str
+                 });
+            }
+        });
+        cb(matches);
+    };
+}
+</script>
+
+</html>

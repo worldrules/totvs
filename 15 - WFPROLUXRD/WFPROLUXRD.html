@@ -1,0 +1,249 @@
+  <html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<link type="text/css" rel="stylesheet" href="style/squareButtons.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.11.6/xlsx.core.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/alasql/0.3/alasql.min.js"></script> 
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="zoom.js" charset="utf-8"></script>
+	<script type="text/javascript" src="WFPROLUXRD.js" charset="utf-8"></script>
+</head>
+<body>
+<div class="fluig-style-guide">
+
+<form name="form" role="form">
+	
+	<div class="container">
+		<div id="aprovacaoGestor" class="row" hidden>
+			<div class="form-group col-sm-4">
+				<label for="aprovacao">Aprovar</label>
+				<div class="input-group">
+		         	<select class="form-control" id="aprovacao" name="aprovacao">
+		         		<option value="reprovar">Reprovar</option>
+		         		<option value="aprovar">Aprovar</option>
+			        </select>
+			    </div>
+		    </div>
+		</div>
+		<div class="row">
+			<h2  class="text-center">Reembolso de Despesas</h2>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-4">
+				<label for="numeroRD">Numero R/D</label>
+				<input type="text" id="numeroRD" name="numeroRD"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="solicitante">Solicitante</label>
+				<input type="text" id="solicitante" name="solicitante"  class="form-control" readonly></input>
+				<input type="hidden" id="solicitanteId" name="solicitanteId"  class="form-control" ></input>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="dataSolicitacao">Data da Solicitação</label>
+				<input type="text" id="dataSolicitacao" name="dataSolicitacao"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-4">
+				<label for="dataSolicitacao">Atividade</label>
+				<input type="hidden" id="Atividade" name="Atividade"  class="form-control" ></input>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-9">
+				<label for="liderAprovacao">Lider Imediato para Aprovação</label>
+				<div class="col-sm-12">
+					<div class="input-group">
+						<input type="zoom" class="form-control row" id="liderAprovacao" name="liderAprovacao" placeholder="Escolha o líder imediato ou o administrador de contrato responsável pela despesa." readonly />
+						<span class="input-group-addon group-zoom no-view zoom-click btn-info" data-event="LiderAprovacao">
+							<span class="fluigicon fluigicon-zoom-in "></span>
+						</span>
+						<span class="input-group-addon group-zoom no-view zoom-click btn-danger" data-event="RemoveLiderAprovacao">
+							<span class="fluigicon fluigicon-remove "></span>
+						</span>
+					</div>
+				</div>
+				<input type="hidden" class="form-control" name="liderAprovacaoId" id="liderAprovacaoId"/>
+			</div>
+		</div>
+		<div class="row">
+      	 	<div class="form-group col-sm-6">
+				<label for="totalAdiantamentosSum">Total Adiantamentos</label>
+				<input type="text" id="totalAdiantamentosSum" name="totalAdiantamentosSum"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="totalDinheiroSum">Total dinheiro</label>
+				<input type="text" id="totalDinheiroSum" name="totalDinheiroSum"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="totalCartaoCreditoSum">Total Cartao Credito</label>
+				<input type="text" id="totalCartaoCreditoSum" name="totalCartaoCreditoSum"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="devolver">Devolver Funcionario</label>
+				<input type="text" id="devolverFuncionario" name="devolverFuncionario"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="devolver">Devolver Prolux</label>
+				<input type="text" id="devolverProlux" name="devolverProlux"  class="form-control" readonly></input>
+			</div>
+		</div>
+		
+		
+		<div class="row">
+			<div class="form-group">
+				<label for="adiantamentos">Adiantamentos</label>			
+				<table class="table table-condensed table-nonfluid table-striped" tablename="adiantamentos" id="adiantamentos" noaddbutton="true"  customFnDelete="itemremove(this)" nodeletebutton="true">
+				   <thead>
+				      <tr>
+				      	 <th class="col-md-1"><span class="fluigicon fluigicon-verified"></span></th>
+				      	 <th class="col-md-3">Data</th>
+				         <th class="col-md-4">Valor</th>
+				         <th class="col-md-4">Status</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+				      <tr>
+				      	 <td> <input type="checkbox" class="check-adiant" id="checkAdiantamento" name="checkAdiantamento"> </td>
+				      	 <td style="display:none"> <input type="hidden"  id="checktext" name="checktext" readonly> </td>
+				   		 <td style="display:none"> <input type="hidden"  id="emitente" name="emitente" readonly> </td>
+						 <td style="display:none"> <input type="hidden"  id="emitenteId" name="emitenteId" readonly> </td>
+						 <td style="display:none"> <input type="hidden"  id="adiantamentoId" name="adiantamentoId" readonly> </td>
+				         <td> <input type="text" class="form-control" id="dataAdiantamento" name="dataAdiantamento" readonly> </td>
+				         <td> <input type="text" class="form-control valorAdiantamento" id="valorAdiantamento" name="valorAdiantamento" readonly> </td>
+				         <td> <input type="text" class="form-control" id="statusAdiantamento" name="statusAdiantamento" readonly> </td>
+				      </tr>
+				   </tbody>
+				</table>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group">
+				<label >Despesas</label>		
+				<table class="table table-condensed table-nonfluid table-striped" tablename="despesas" id="despesas" noaddbutton="true" nodeletebutton="false" >
+				   <thead>
+				      <tr>
+			      	 	<th class="col-md-12">
+				      	 	<div class="form-group col-sm-12">
+				      	 		<button type="button" id="btnAddDesp" class="btn btn-primary btn-sm active" onclick="addDespesas('despesas', this);">Adicionar Despesa</button>
+				      			<button type="button" id="btndesp" class="btn btn-primary btn-sm active" onclick="exportarDespesa(this);">Exportar itens de despesa</button>
+				      			<button type="button" id="btncc" class="btn btn-primary btn-sm active" onclick="exportarCC(this);">Exportar agrupados por CC</button>
+				      			<button type="button" id="btnsap" class="btn btn-primary btn-sm active" onclick="exportarSAP(this);">Exportar itens SAP</button>
+				      		</div>
+			      	 	</th>
+				      </tr>
+				   </thead>
+				   <tbody>
+			   		<tr>
+			   			<td>
+			   				
+					        <div class="form-group col-sm-4">
+				         		<label for="despesa">Despesa</label>
+					         	<input type="text" class="form-control nomeDespesa" id="nomeDespesa" name="nomeDespesa">
+					         	<input type="hidden" class="pis" id="pis" name="pis" value="0">
+					         	<input type="hidden" class="cofins" id="cofins" name="cofins" value="0">
+					        </div>
+					        <div class="form-group col-sm-4">
+			         			<label for="dataNf">Data N.F.</label>
+					         	<input type="text" class="form-control dateFormat dataNf" readonly id="dataNf" name="dataNf">
+					        </div>
+					        <div class="form-group col-sm-4">
+		         				<label for="totalDinheiro">Total Dinheiro</label>
+					         	<input type="text" class="form-control moneyFormat somaDinheiro" id="totalDinheiro" name="totalDinheiro">
+					        </div>
+					        <div class="form-group col-sm-4">
+	  							<label for="totalCartaoCredito">Total Cartão de Credito</label>
+	  							<input type="text" class="form-control moneyFormat somaCartao" id="totalCartaoCredito" name="totalCartaoCredito">
+	  						</div>
+					        <div class="form-group col-sm-4">
+	      						<label for="numeroParcelas">Numero de Parcelas</label>
+					         	<input type="text" class="form-control numeroParcelas" id="numeroParcelas" name="numeroParcelas">
+					        </div>
+					        <div class="form-group col-sm-4">
+								<label for="ccInterno">CC Interno</label> 
+					         	<input
+								    type="zoom"
+								    id = "ccInterno"
+								    name="ccInterno"
+								    class="centroCusto",
+								    data-zoom="{
+								        'displayKey':'nomeCC',
+								        'datasetId':'dsCentroCustoInterno',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Escolha o Centro de Custo',
+								        'fields':[
+								            {
+								               'field':'cc',
+								               'label':'CC'
+								            },{
+								              'field':'nomeCC',
+								              'label':'Nome do Centro de Custos',
+								              'standard':'true'
+								            },{
+								              'field':'administradorContrato',
+								              'label':'Administrador do Contrato'
+								            },{
+								              'field':'responsavelTecnico',
+								              'label':'Responsavel Tecnico'
+								            }
+								        ]
+								     }"
+								/>
+					        </div>
+					        <div class="form-group col-sm-4">
+								<label for="projeto">Projeto</label> 
+					         	<input
+								    type="zoom"
+								    id = "projeto"
+								    name="projeto"
+								    class="projeto"
+								    data-zoom="{
+								        'displayKey':'nomeContrato',
+								        'datasetId':'dsProjetosCC',
+								        'maximumSelectionLength':'1',
+								        'placeholder':'Escolha o Projeto',
+								        'fields':[
+								            {
+								               'field':'cc',
+								               'label':'CC'
+								            },{
+								              'field':'nomeContrato',
+								              'label':'Nome do Contrato',
+								              'standard':'true'
+								            },{
+								              'field':'administradorContrato',
+								              'label':'Administrador do Contrato'
+								            },{
+								              'field':'responsavelTecnico',
+								              'label':'Responsavel Tecnico'
+								            }
+								        ]
+								     }"
+								/>
+					        </div>
+					        <div class="form-group col-sm-4">
+								<label for="NFcomCNPJ">Nota fiscal em Nome/CNPJ da prolux.</label>
+								<div class="input-group">
+						         	<select class="form-control" id="NFcomCNPJ" name="NFcomCNPJ" onchange="calculaImpostos(this)">
+							            <option value="sim">Sim</option>
+							            <option value="nÃ£o">Não</option>
+							        </select>
+						         	<span class="input-group-btn">
+						         		<button id="btn-nota" class="btn btn-default" onclick="showCamera(this.id);" type="button">Nota</button>
+						            </span>
+					         	</div>
+					        </div>
+			         	</td>
+		         	</tr>
+				   </tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</form>
+</div>
+</body>
+</html>

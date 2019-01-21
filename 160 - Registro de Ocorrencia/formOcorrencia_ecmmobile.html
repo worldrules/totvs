@@ -1,0 +1,113 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+		<meta content="pt-br" http-equiv="Content-Language" />
+		<meta content="text/html; charset=ISO-8859-1" http-equiv="Content-Type" />
+		<title>610 - Registro de Ocorrencia</title>
+		<style type="text/css">
+			body {
+				font-family: Verdana, Geneva, Tahoma, sans-serif;	
+			    background-color: #ddd; /* Background color */
+			    color: #222;            /* Foreground color used for text */
+			    font-family: Helvetica; 
+			    font-size: 14px;
+			    margin: 0;              /* Amount of negative space around the outside of the body */
+			    padding: 0;             /* Amount of negative space around the inside of the body */	
+				min-width:300px;
+			}
+			h1 {
+			    margin: 0;
+			    padding: 0;
+			    background-color: #ccc;
+			    border-bottom: 1px solid #666;
+			    color: #222;
+			    display: block;
+			    font-size: 20px;
+			    font-weight: bold;
+			    padding: 10px 0;
+			    text-align: center;
+			    text-decoration: none;    
+			    text-shadow: 0px 1px 0px #fff;
+			    background-image: -webkit-gradient(linear, left top, left bottom, from(#ccc), to(#999));    
+			}
+			ul {
+			    list-style: none;
+			    margin: 10px;
+			    padding: 0;
+			}
+			ul li {
+			    background-color: #FFFFFF;
+			    border: 1px solid #999999;
+			    color: #222222;
+			    display: block;
+			    font-size: 17px;
+			    font-weight: bold;
+			    margin-bottom: -1px;
+			    padding: 12px 10px;
+			    text-decoration: none;
+			}
+			ul li:first-child {
+			    -webkit-border-top-left-radius: 8px;
+			    -webkit-border-top-right-radius: 8px;
+			}
+			ul li:last-child {
+			    -webkit-border-bottom-left-radius: 8px;
+			    -webkit-border-bottom-right-radius: 8px;
+			    position:relative;
+			}
+			.mylabel {
+				width: 32%;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-o-text-overflow: ellipsis;
+				white-space: nowrap;
+				display:inline-block;
+				position:relative;
+				float:left;
+				line-height:32px;
+			}
+			.input-selection {
+				width: 100%;
+				float: left;
+				margin-top: 5px;
+			}
+			.input-textarea {
+				width: 100%;
+				height: 50px;
+			}
+			input[type=text] { 
+				width: 59%; 
+				font-family: Verdana, Geneva, Tahoma, sans-serif;	
+				font-size: 18px;
+				background-color: #E8E8E8;
+				position:relative;
+				float:left;
+			} 
+			ul li span {
+				width: 59%; 
+				overflow: hidden;
+				text-overflow: ellipsis;
+				-o-text-overflow: ellipsis;
+				white-space: nowrap;
+				display:inline-block;
+				position:relative;
+				float:left;
+				line-height:32px;
+				background: #e6e6e6;
+				border: 1px solid #cccccc;
+				padding-right: 3px;
+				padding-left: 3px;
+			}
+		</style>
+	</head>
+	
+	<body>
+		<form  method="post" action="">
+			<h1>610 - Registro de Ocorrencia</h1>
+			<ul>
+				<li><div class='mylabel'>cdOcorrencia </div><input name='cdOcorrencia' type='text' placeholder='cdOcorrencia' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmUsuario </div><input name='nmUsuario' type='text' placeholder='nmUsuario' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dtRegistro </div><input name='dtRegistro' type='text' placeholder='dtRegistro' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dtOcorrencia </div><input name='dtOcorrencia' type='text' placeholder='dtOcorrencia' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmTipoAcao </div><select name='nmTipoAcao' class='input-selection'><option value='AÃÂ§ÃÂ£o Preventiva'>AÃÂ§ÃÂ£o Preventiva</option><option value='AÃÂ§ÃÂ£o Corretiva'>AÃÂ§ÃÂ£o Corretiva</option><option value='Melhoria'>Melhoria</option></select><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmTipoOcorrencia </div><select name='nmTipoOcorrencia' class='input-selection'></select><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmArea </div><input name='nmArea' type='text' placeholder='nmArea' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmOrigem </div><input name='nmOrigem' type='text' placeholder='nmOrigem' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>nmCriticidade </div><select name='nmCriticidade' class='input-selection'></select><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>fgContencao </div><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>fgOcorrenciaReincidente </div><label class='input-selection'><input type='radio' name='fgOcorrenciaReincidente' value='Sim'/>Sim</label><label class='input-selection'><input type='radio' name='fgOcorrenciaReincidente' value='NÃÂ£o'/>NÃÂ£o</label><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cdOcorrenciaReincidente </div><input name='cdOcorrenciaReincidente' type='text' placeholder='cdOcorrenciaReincidente' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsOcorrencia </div><textarea name='dsOcorrencia' type='text' placeholder='dsOcorrencia' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsContencao </div><textarea name='dsContencao' type='text' placeholder='dsContencao' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsAnaliseCausa </div><textarea name='dsAnaliseCausa' type='text' placeholder='dsAnaliseCausa' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMedicaoPrincipal </div><textarea name='dsMedicaoPrincipal' type='text' placeholder='dsMedicaoPrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaodeObraPrincipal </div><textarea name='dsMaodeObraPrincipal' type='text' placeholder='dsMaodeObraPrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaterialPrincipal </div><textarea name='dsMaterialPrincipal' type='text' placeholder='dsMaterialPrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMedicaoSecundaria </div><textarea name='dsMedicaoSecundaria' type='text' placeholder='dsMedicaoSecundaria' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaodeObraSecundaria </div><textarea name='dsMaodeObraSecundaria' type='text' placeholder='dsMaodeObraSecundaria' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaterialSecundario </div><textarea name='dsMaterialSecundario' type='text' placeholder='dsMaterialSecundario' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsEfeito </div><textarea name='dsEfeito' type='text' placeholder='dsEfeito' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMeioAmbienteSecundario </div><textarea name='dsMeioAmbienteSecundario' type='text' placeholder='dsMeioAmbienteSecundario' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMetodoSecundario </div><textarea name='dsMetodoSecundario' type='text' placeholder='dsMetodoSecundario' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaquinaSecundario </div><textarea name='dsMaquinaSecundario' type='text' placeholder='dsMaquinaSecundario' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMeioAmbientePrincipal </div><textarea name='dsMeioAmbientePrincipal' type='text' placeholder='dsMeioAmbientePrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMetodoPrincipal </div><textarea name='dsMetodoPrincipal' type='text' placeholder='dsMetodoPrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsMaquinaPrincipal </div><textarea name='dsMaquinaPrincipal' type='text' placeholder='dsMaquinaPrincipal' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq pergunta 1 </div><textarea name='cincopq_pergunta_1' type='text' placeholder='cincopq pergunta 1' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq resposta 1 </div><textarea name='cincopq_resposta_1' type='text' placeholder='cincopq resposta 1' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq pergunta 2 </div><textarea name='cincopq_pergunta_2' type='text' placeholder='cincopq pergunta 2' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq resposta 2 </div><textarea name='cincopq_resposta_2' type='text' placeholder='cincopq resposta 2' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq pergunta 3 </div><textarea name='cincopq_pergunta_3' type='text' placeholder='cincopq pergunta 3' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq resposta 3 </div><textarea name='cincopq_resposta_3' type='text' placeholder='cincopq resposta 3' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq pergunta 4 </div><textarea name='cincopq_pergunta_4' type='text' placeholder='cincopq pergunta 4' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq resposta 4 </div><textarea name='cincopq_resposta_4' type='text' placeholder='cincopq resposta 4' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq pergunta 5 </div><textarea name='cincopq_pergunta_5' type='text' placeholder='cincopq pergunta 5' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq resposta 5 </div><textarea name='cincopq_resposta_5' type='text' placeholder='cincopq resposta 5' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>cincopq causa raiz </div><textarea name='cincopq_causa_raiz' type='text' placeholder='cincopq causa raiz' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsAcoesExecutadas </div><textarea name='dsAcoesExecutadas' type='text' placeholder='dsAcoesExecutadas' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>dsEficacia </div><textarea name='dsEficacia' type='text' placeholder='dsEficacia' class='input-textarea'></textarea><div style='clear:both; line-height: 1px'>&nbsp;</div></li><li><div class='mylabel'>status </div><input name='status' type='text' placeholder='status' /><div style='clear:both; line-height: 1px'>&nbsp;</div></li>
+			</ul>
+		</form>
+	</body>
+</html>

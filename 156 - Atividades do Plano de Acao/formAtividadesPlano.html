@@ -1,0 +1,81 @@
+<html>
+	<head>
+		<title>Atividades do Plano de A&ccedil;&atilde;o</title>
+		<link rel="stylesheet" type="text/css" href="/kitecm/css/style.css"/>
+		<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+		<link rel="stylesheet" type="text/css" href="css/custom.css"/>
+	</head>
+	<body id="KitGestaoQualidade" onload="window.parent.document.getElementById('workflowView-cardViewer').style.border='none'; getDataAtual();">
+		<div class="container">
+	    	<div id="logo">
+				<img src="img/fluig.png" width="83px" height="83px">
+			</div>
+			<h2 style="padding-bottom: 20px !important">i18n.translate("titulo")</h2>
+			<form name="formAPA" id="formAPA" action="" method="post" class="form-horizontal">
+				<fieldset>
+			  		<legend>i18n.translate("legend_dados_PA")</legend>
+			    	<div class="form-group">
+				    	<label for="cdPlanoAcao" class="col-sm-2 control-label">i18n.translate("Num_PA")</label>
+				    	<div class="input-group col-sm-5" style="padding-left: 15px !important;">
+				      		<input type="text" class="form-control" name="cdPlanoAcao" id="cdPlanoAcao" readonly="true">
+				      		<a style="width: 10px !important;" href="#" class="input-group-addon" id="goToOccurrence" name="goToOccurrence" title="Exibir dados do Plano de A&ccedil;&atilde;o"><i class="glyphicon glyphicon-arrow-right"></i></a>
+				    	</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label for="nmResponsavelPA" class="col-sm-2 control-label">i18n.translate("Respon_PA")</label>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="nmResponsavelPA" id="nmResponsavelPA" readonly="true">
+				    	</div>
+				  	</div>
+				</fieldset>
+				
+				<fieldset>
+			  		<legend>i18n.translate("legend_dados_APA")</legend>
+			    	<div class="form-group">
+				    	<label for="cdAtividadePA" class="col-sm-2 control-label">i18n.translate("Num_APA")</label>
+				    	<div class="col-sm-5">
+				      		<input type="text" class="form-control" name="cdAtividadePA" id="cdAtividadePA" readonly="true">
+				    	</div>
+				  	</div>
+				  	<div class="form-group">
+				    	<label for="nmOquCom" class="col-sm-2 control-label">i18n.translate("OqueComo")</label>
+				    	<div class="col-sm-8" >
+				      		<textarea class="form-control" rows="3" cols="8" name="nmOquCom" id="nmOquCom" readonly="true"></textarea>
+				    	</div>
+				  	</div>
+				  	
+				  	<div class="form-group">
+				    	<label for="nmResponsavel" class="col-sm-2 control-label">i18n.translate("nm_respon")</label>
+				    	<div class="col-sm-8" >
+				      		<input text="text" class="form-control" id="nmResponsavel" name="nmResponsavel" readonly="true">
+				    	</div>
+				  	</div>
+				  	<input type="hidden" id="hiddenMatResponsavel" name="hiddenMatResponsavel" value=""/>
+				  	
+				  	<div class="form-group">
+				    	<label for="nmPrazoDeConclusao" class="col-sm-2 control-label">i18n.translate("prazo_conc")</label>
+				    	<div class="col-sm-8" >
+				      		<input text="text" class="form-control" id="nmPrazoDeConclusao" name="nmPrazoDeConclusao" readonly="true">
+				    	</div>
+				  	</div>
+				  	<input id="dtConclusaoReal" name="dtConclusaoReal" type="hidden" readonly="readonly" value=""/>
+				  	
+				  	<div class="form-group">
+				    	<label for="dsAtividade" class="col-sm-2 control-label">i18n.translate("ds_ativ")</label>
+				    	<div class="col-sm-8" >
+				      		<textarea class="form-control" rows="3" cols="8" id="dsAtividade" name="dsAtividade"></textarea>
+				    	</div>
+				  	</div>
+				  	<input type="hidden" name="status" id="status" size="5" readonly="readonly" />
+				</fieldset>
+			</form>
+		</div>
+		<script src="js/jquery-1.11.1.min.js"></script>
+		<script src="js/bootstrap.min.js"></script>		
+		<script src="/webdesk/vcXMLRPC.js"></script>
+		<script src="custom.js"></script>
+		<!--<script src="/kitecm/js/brava.js"></script>-->		
+		
+	</body>
+</html>

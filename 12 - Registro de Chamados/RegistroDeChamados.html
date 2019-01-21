@@ -1,0 +1,177 @@
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="registroDeChamados.js"></script>
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script> 
+	<link rel="stylesheet" type="text/css" href="/style-guide/css/fluig-style-guide-addtocalendar.min.css">
+	<script src="/style-guide/js/fluig-style-guide-addtocalendar.min.js"></script>
+</head>
+ <!-- Cabeçalho -->
+<body>
+
+<div class="fluig-style-guide">
+	<form name="form" role="form">
+		<div class="panel panel-primary" id="requisitante" >
+			
+			<div class="panel-heading">
+				<h3 class="panel-title">Registro de Chamado</h3>
+			</div>
+ <!-- Body -->
+		<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-sm-3">
+						<label for="nrChamado">Nr Chamado</label>			
+						<input type="text" id="nrChamado" name="nrChamado"  class="form-control" readonly></input>
+					</div>
+					<div class="form-group col-sm-6">
+						<label for="solicitante">Solicitante</label>
+						<input type="hidden" name="matSolicitante" id="matSolicitante">			
+						<input type="text" id="solicitante" name="solicitante"  class="form-control" readonly></input>
+					</div>
+					<div class="form-group col-sm-3">
+						<label for="dataSolicitacao">Data da Solicitação</label>			
+						<input type="text" id="dataSolicitacao" name="dataSolicitacao"  class="form-control dateFormat" readonly></input>
+					</div>
+				</div>
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label for="assunto">Assunto</label>			
+						<input type="text" id="assunto" name="assunto"  class="form-control"></input>
+					</div>
+			<!-- Campo Zoom - Centro de Custo -->
+						<div class="form-group col-sm-6">
+							<label for="centroCusto">Centro de Custo</label>			
+									<input
+									type="zoom"
+									id = "centroCusto"
+									name="centroCusto"
+									data-zoom="{
+										'displayKey':'cc',
+										'datasetId':'dsCentroCustoInterno',
+										'placeholder':'Escolha',
+										'fields':[
+											{
+											   'field':'cc',
+											   'label':'Centro de Custo'
+											},{
+												   'field':'nomeCC',
+												   'label':'Nome'
+											},{
+											  'field':'administradorContrato',
+											  'label':'Administrador',
+											  'standard':'true'
+											},{
+											  'field':'responsavelTecnico',
+											  'label':'Tecnico',
+											  'standard':'true'
+											}
+										]
+									 }"
+								/>
+						</div>
+			<!-- Campo Zoom - Centro de Custo -->
+						<div class="form-group col-sm-3">
+							<label for="prioridade">Prioridade</label>			
+							<select id="prioridade" name="prioridade"  class="form-control">
+								<option disabled selected value>Selecione uma prioridade</option>
+								<option value="alta">Alta</option>
+								<option value="media">Media</option>
+								<option value="baixa">Baixa</option>
+							</select>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label for="prazoChamado">Prazo</label>			
+							<input id="prazoChamado" name="prazoChamado"  class="form-control"/>
+						</div>
+						<div class="form-group col-sm-3">
+							<label for="envioPara">Envio Para</label>			
+							<select id="envioPara" name="envioPara" dataset="workflowRole" datasetkey="workflowRolePK.roleId" datasetvalue="roleDescription" addBlankLine="false" class="form-control"></select>
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="responsavel">Responsável</label>			
+							<select id="responsavel" name="responsavel" class="form-control"><option></option></select>
+							<input type="text" id="matResp" name="matResp" class="form-control" style="display:none;"></input>
+						</div>
+					</div>
+					<!-- Row -->
+					<div class="col-md-12">
+						<div class="row">
+							<label for="descChamado">Descrição do Chamado</label>
+							<textarea class="form-control" name="descChamado" id="descChamado" cols="28" rows="8"></textarea>
+						</div>
+					</div>
+				</div> <!--Fim do Container Principal-->
+		</div>
+		
+		<!--Area Responsavel-->
+		<div class="panel panel-primary" id="areaResponsavel" style="display:none;">
+				<div class="panel-heading">
+					<h3 class="panel-title">Área Responsável</h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+							<div class="form-group col-sm-6">
+								<label for="responsavelFormArea">Responsável</label>			
+								<select id="responsavelFormArea" name="responsavelFormArea" class="form-control"><option></option></select>
+							</div>
+							<div class="form-group col-sm-6 ">
+								<label for="dataResponsavel">Data</label>			
+								<input type="text" id="dataResponsavel" name="dataResponsavel"  class="form-control dateFormat"></input>
+							</div>
+					</div>
+					<!-- row -->
+					<div class="row">
+						<div class="form-group col-sm-3">
+							<label for="status">Status</label>			
+							<select class="form-control" id="status" name="status">
+								<option value="novoPrazo">Novo Prazo</option>
+								<option value="concluido">Concluido</option>
+							</select>
+			<!-- Prazo e Comentario -->
+						</div>
+						<div id="novoPrazoDiv" class="form-group col-sm-3">
+							<label for="novoPrazo">Novo Prazo</label>			
+							<input type="text" id="novoPrazo" name="novoPrazo"  class="form-control"></input>
+						</div>
+						<div class="form-group col-sm-6">
+							<label for="comentario">Comentário</label>			
+							<textarea id="comentario" name="comentario"  class="form-control" rows="6"></textarea>
+						</div>
+					</div>
+				<!-- row -->
+				<div class="panel panel-primary" id="areaFinal" style="display:none;">
+						<div class="panel-heading">
+							<h3 class="panel-title">Finalizar</h3>
+						</div>
+						<div class="panel-body">
+							<div class="row">
+								<div class="form-group col-md-3">
+									<label for="finalizar">Finalizar</label>			
+									<select class="form-control" id="finalizar" name="finalizar">
+										<option value="finalizado">Finalizar</option>
+										<option value="realizarSolicitacao">Realizar Solicitação</option>
+									</select>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+			</div>
+<script>
+var dataResponsavel = FLUIGC.calendar('#dataResponsavel');
+var novoPrazo = FLUIGC.calendar('#novoPrazo');
+var novoPrazo = FLUIGC.calendar('#prazoChamado');
+</script>
+</body>
+</html>

@@ -1,0 +1,606 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>	
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="/webdesk/vcXMLRPC.js"></script>
+	<meta charset="UTF-8"> 
+<style> 
+.obrigatorio 
+{ 
+color:red; 
+}
+</style>
+</head>
+<body>
+
+<div class="fluig-style-guide">
+<form name="form" role="form">
+		<!-- REQUISITANTE -->
+	<div class="panel panel-primary" id="requisitante" >
+		<div class="panel-heading">
+		    <h3 class="panel-title">Requisitante</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row" id="LinhaRequistDat">
+				<div class="form-group col-md-8">
+					<label for="nomeRequisitante">Nome do requisitante<span class="obrigatorio"> *</span></label>					
+					<input type="text" name="nomeRequisitante" id="nomeRequisitante" class="form-control" readonly>
+					<input type="hidden" name="IdAtivi" id="IdAtivi" class="form-control">
+				</div>
+				<div class="form-group col-md-4">
+					<label for="dataSolRequisitante">Data da solicitação<span class="obrigatorio" > *</span></label>
+					<input type="text" name="dataSolRequisitante" id="dataSolRequisitante" class="form-control" readonly>
+				</div>
+				<!-- <div class="form-group col-md-4"> -->
+					<!-- <label for="statusRequisitante">Status<span class="obrigatorio" name="obgNome" > *</span></label> -->
+					<!-- <input type="text" name="statusRequisitante" id="statusRequisitante" class="form-control"> -->
+				<!-- </div> -->
+			</div>	
+			<div class="row">
+				<div class="form-group col-md-4" id="Cliente">
+					<label for="cliente">Cliente<span class="obrigatorio" > *</span></label>
+					<input
+							type="zoom"
+							id = "cliente"
+							name="cliente"
+							data-zoom="{
+								'displayKey':'nomeCadCli2',
+								'datasetId':'dsNovoCliente',
+								'placeholder':'Escolha o cliente',
+								'fields':[
+									{
+											'field':'nomeCadCli2',
+											'label':'Nome'
+										}
+										]
+							 }"
+						/>
+				</div>
+				
+				
+				
+<!-- --------------------------------------------------------------------------------------------------------- -->	
+				<!--  <div class="form-group col-md-4">
+					<label for="contato">Contato<span class="obrigatorio" > *</span></label>
+					<input type="text" name="contato" id="contato" class="form-control">
+				</div>-->
+				
+				<div class="form-group col-md-4" id="Contato">
+					<label for="cliente">Contato<span class="obrigatorio" > *</span></label>
+					<input
+							type="zoom"
+							id = "contato"
+							name="contato"
+							data-zoom="{
+								'displayKey':'contatoCadCli',
+								'datasetId':'dsTesteCliente',
+								'placeholder':'Escolha',
+								'fields':[
+									{
+									   'field':'contatoCadCli',
+									   'label':'Nome do Contato'
+									}
+								]
+							 }"
+						/>
+				</div>	
+				<div class="form-group col-md-4" id="DivNPro">
+						<label for="numProlux">Número Proposta</label>									
+						<select  name="numProlux" id="numProlux" class="form-control" ></select>				
+						<!-- SELECT dataset="Cadastro de Cliente - Oportunidade - Contratos" datasetkey="numProlux2" datasetvalue="numProlux2" onchange="numeroProlux();" -->
+				</div>
+				
+<!-- --------------------------------------------------------------------------------------------------------- -->	
+			</div>			
+			<div class="row">
+				<div class="form-group col-md-6" id="CCusto">
+					<label for="centroDeCusto">Centro de custo<span class="obrigatorio" > *</span></label>
+					<input
+							type="zoom"
+							id = "centroDeCusto"
+							name="centroDeCusto"
+							data-zoom="{
+								'displayKey':'cc',
+								'datasetId':'dsCentroCustoInterno',
+								'placeholder':'Escolha',
+								'fields':[
+									{
+									   'field':'cc',
+									   'label':'Centro de Custo'
+									},{
+									  'field':'administradorContrato',
+									  'label':'Administrador',
+									  'standard':'true'
+									},{
+									  'field':'responsavelTecnico',
+									  'label':'Tecnico',
+									  'standard':'true'
+									}
+								]
+							 }"
+						/>
+				</div>
+<!-- -------------------------------------------------------------------------------------------------------------------------------------- -->
+				<div class="form-group col-md-4" id="Ativ">
+					<label for="ZAtiv">Atividade<span class="obrigatorio" > *</span></label>
+					<input
+							type="zoom"
+							id = "ZAtiv"
+							name="ZAtiv"
+							data-zoom="{
+								'displayKey':'atividade',
+								'datasetId':'dsAtividadesCRM',
+								'placeholder':'Escolha',
+								'fields':[
+									{
+									   'field':'atividade',
+									   'label':'Atividade'
+									},{
+									  'field':'horaHomem',
+									  'label':'HH',
+									  'standard':'true'
+									}
+								]
+							 }"
+						/>
+				</div>
+<!-- --------------------------------------------------------------------------------------------------------------------------------------- -->
+				<div class="form-group col-md-2" id="DatExec">
+					<label for="dataExecucao">Data de execução<span class="obrigatorio" > *</span></label>
+					<input type="text" name="dataExecucao" id="dataExecucao" class="form-control">
+				</div>
+			</div>
+			<br>
+			<div class="row">			
+				<div class="form-group col-md-12">
+				<label for="docs">Documentação<span class="obrigatorio" > *</span></label>
+						<div class="row">
+						<div class="checkbox" id="ChekDocTec">
+								<div class="form-group col-md-3">
+									<label><input type="checkbox" name="docTecnico" id="docTecnico" onclick="mudarDocTec('esconde')" >Incluir documentação técnica</label>							
+								</div>								
+						</div>
+						</div>
+						<!-- INCLUI DOCUMENTAÃ‡ÃƒO TÃ‰CNICA -->
+						<div style="display:none"  id="esconde" >
+						<div class="row">
+							<div class="form-group col-md-12">
+									<label for="tecnicoResponsavel">Documentação técnica<span class="obrigatorio" > *</span></label>
+									<input
+										class="form-group col-md-12"
+										type="zoom"
+										id = "responsavel"
+										name="responsavel"
+										data-zoom="{
+											'displayKey':'nome',
+											'datasetId':'dsTecnicos',
+											'placeholder':'Escolha',
+											'fields':[
+												{
+												   'field':'nome',
+												   'label':'Nome'
+												},{
+												  'field':'mail',
+												  'label':'E-mail',
+												  'standard':'true'									 
+												}
+											]
+										 }"
+									/>
+									<input type="hidden" id="idResponsavel" name="idResponsavel">					
+							</div>	
+							</div>
+							<div class="row">
+								<div class="form-group col-md-4">
+									<label for="nomeTec">Nome do Documento Técnico<span class="obrigatorio" > *</span></label>
+									<input type="text" name="nomeTec" id="nomeTec" class="form-control">
+								</div>
+								<div class="form-group col-md-4">
+									<div class="checkbox">
+										<label><input type="checkbox" name="docOK" id="docOK" value="ok" onclick="Tiraok()">Documento Ok?</label>								
+									</div>
+								</div>
+							</div>
+							
+							</div>
+													
+						
+						<!-- INCLUI DOCUMENTAÃ‡ÃƒO TÃ‰CNICA -->
+						
+						<!--INCLUI DOCUMENTAÃ‡ÃƒO DE TRABALHO -->
+						<div class="row">
+						<div class="checkbox" id="ChekDocTrab">
+								<div class="form-group col-md-3">
+									<label><input type="checkbox" id="docTrabalho" name="docTrabalho" onclick="mudarDocTra('esconde2')">Incluir documentação de trabalho</label>							
+								</div>
+						</div>
+						</div>
+						<div  style="display:none" id="esconde2" >
+						<div class="row">
+							<div class="form-group col-md-12">
+								<table tablename="tbOrcamento" id="tbOrcamento" noaddbutton="true" nodeletebutton="true" colspan="1" class="table table-condensed table-striped" >
+									<thead>
+										<tr>
+											<th style=" width: 40%;">Técnico<span class="obrigatorio" > *</span></th>	
+											<th style=" width: 30%;">Nome do Documento de Trabalho<span class="obrigatorio" > *</span></th>
+											<th style=" width: 20%;">  Documento<span class="obrigatorio" > *</span></th>							
+											<th class="text-center">
+												<span class="fluigicon fluigicon-plus-sign fluigicon-lg" id="addOrcamento" alt='adicionar_linha' title='Adicionar Orçamento' style="cursor: pointer;" onclick="addPaiFilho();"></span>
+											</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>
+												
+												<input class="form-group col-md-12"
+														type="zoom"
+														id = "tecResponsavel"
+														name="tecResponsavel"
+														data-zoom="{
+																'displayKey':'nome',
+																'datasetId':'dsTecnicos',
+																'placeholder':'Escolha',
+																'fields':[
+																	{
+																	   'field':'nome',
+																	   'label':'Nome'
+																	},{
+																	  'field':'mail',
+																	  'label':'E-mail',
+																	  'standard':'true'									 
+																	}
+																]
+															 }"
+													/>
+											</td>
+											<td><input type="text" name="nomeTrab" id="nomeTrab" class="form-control"></td>
+											<td><label><input type="checkbox" name="docTrabOK" id="docTrabOK" onchange="SetaVal(this)">Documento Ok?</label></td>																
+											<td class="text-center">
+												<span class="fluigicon fluigicon-minus-sign fluigicon-lg" id="removeOrcamento" alt='remover_linha' title='Remover OrÃ§amento' onclick="fnCustomDelete(this)" style="cursor: pointer;" ></span>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							</div>
+							
+						</div> 
+					</div>
+						<!--INCLUI DOCUMENTAÃ‡ÃƒO DE TRABALHO -->						
+				</div>				
+						
+			<br>
+			<div class="row">				
+				<div class="form-group col-md-12">
+					<label for="obsRequisitante">Comentários/Observações</label>
+					<textarea rows="4" name="obsRequisitante" id="obsRequisitante" class="form-control"></textarea>
+				</div>				
+			</div>	
+					
+	</div>
+	<!-- REQUISITANTE -->
+</div>
+	<!-- RESPONSÃ�VEL TÃ‰CNICO -->
+	<div class="panel panel-primary" id="respTecnico">
+		<div class="panel-heading">
+		    <h3 class="panel-title">RESPONSÁVEL TÉCNICO</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-8">
+					<label for="nomeResponsavel">Nome do responsável<span class="obrigatorio" > *</span></label>
+					<input type="text" name="nomeResponsavel" id="nomeResponsavel" class="form-control" readonly>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="dataResponsavel">Data<span class="obrigatorio" > *</span></label>
+					<input type="text" name="dataResponsavel" id="dataResponsavel" class="form-control" readonly>
+				</div>				
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsResponsavel">Comentários/Observações</label>
+					<textarea rows="4" name="obsResponsavel" id="obsResponsavel" class="form-control"></textarea>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<!-- RESPONSÃ�VEL TÃ‰CNICO -->
+	
+	<!-- RESPONSÃ�VEL TÃ‰CNICO - EXECUTOR -->
+	<div class="panel panel-primary" id="respTecnicoExecutor">
+		<div class="panel-heading">
+		    <h3 class="panel-title">RESPONSÁVEL TÉCNICO - EXECUTOR</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-4">
+					<label for="nomeRespTecnicoExecutor">Nome do responsável<span class="obrigatorio" > *</span></label>
+					<input type="text" name="nomeRespTecnicoExecutor" id="nomeRespTecnicoExecutor" class="form-control" readonly> 
+				</div>
+				<div class="form-group col-md-4">
+					<label for="dataRespTecnicoExecutor">Data<span class="obrigatorio" > *</span></label>
+					<input type="text" name="dataRespTecnicoExecutor" id="dataRespTecnicoExecutor" class="form-control" readonly>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="cliente">Delegar executor<span class="obrigatorio" > *</span></label>
+					<input
+							type="zoom"
+							id = "executor"
+							name="executor"
+							data-zoom="{
+								'displayKey':'colleagueName',
+								'datasetId':'colleague',
+								'placeholder':'Escolha',
+								'fields':[
+									{
+									   'field':'colleagueName',
+									   'label':'Nome'
+									},{
+									  'field':'colleagueId',
+									  'label':'Id',
+									  'standard':'true'									 
+									}
+								]
+							 }"
+						/>
+					<input type="hidden" id="idExecutor" name="idExecutor">	
+				</div>
+			</div>	
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsRespTecnicoExecutor">Comentários/Observações</label>
+					<textarea rows="4" name="obsRespTecnicoExecutor" id="obsRespTecnicoExecutor" class="form-control"></textarea>
+				</div>
+			</div>	
+		</div>
+	</div>
+	<!-- RESPONSÃ�VEL TÃ‰CNICO - EXECUTOR -->
+	
+	<!-- DEPARTAMENTO PESSOAL -->
+	<div class="panel panel-primary" id="dptoPessoal">
+		<div class="panel-heading">
+		    <h3 class="panel-title">DEPARTAMENTO PESSOAL</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-8">
+					<label for="nomeDptoPessoal">Nome do solicitante<span class="obrigatorio"  > *</span></label>
+					<input type="text" name="nomeDptoPessoal" id="nomeDptoPessoal" class="form-control" readonly>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="dataDptoPessoal">Data da solicitação<span class="obrigatorio" > *</span></label>
+					<input type="text" name="dataDptoPessoal" id="dataDptoPessoal" class="form-control" readonly>
+				</div>
+				<!-- <div class="form-group col-md-4"> -->
+					<!-- <label for="status3">Status</label> -->
+					<!-- <input type="text" name="statusDptoPessoal" id="statusDptoPessoal" class="form-control"> -->
+				<!-- </div> -->
+				<div class="form-group col-md-12">
+					<label for="obsDptoPessoal">Comentários/Observações</label>
+					<textarea rows="4" name="obsDptoPessoal" id="obsDptoPessoal" class="form-control"></textarea>
+				</div>
+			</div>				
+		</div>
+	</div>
+	<!-- DEPARTAMENTO PESSOAL -->
+	
+	<!-- EXECUTOR-->
+	<div class="panel panel-primary" id="executor1">
+		<div class="panel-heading">
+		    <h3 class="panel-title">EXECUTOR</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsExecutor">Comentários/Observações</label>
+					<textarea rows="4" name="obsExecutor" id="obsExecutor" class="form-control"></textarea>
+				</div>
+			</div>				
+		</div>
+	</div>
+	<!-- EXECUTOR -->
+	
+	<!-- RESPONSÃ�VEL TÃ‰CNICO - RECEBER RELATÃ“RIO-->
+	<div class="panel panel-primary" id="respTecRel">
+		<div class="panel-heading">
+		    <h3 class="panel-title">RESPONSÁVEL TÉCNICO - RECEBER RELATÓRIO</h3>
+		</div>
+		<div class="panel-body">			
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsrespTecRel">Comentários/Observações</label>
+					<textarea rows="4" name="obsrespTecRel" id="obsrespTecRel" class="form-control"></textarea>
+				</div>
+			</div>				
+		</div>
+	</div>
+	<!-- RESPONSÃ�VEL TÃ‰CNICO - RECEBER RELATÃ“RIO -->
+	
+	<!-- REQUISITANTE - AVALIAR ATENDIMENTO -->
+	<div class="panel panel-primary" id="reqAvaliaAtendimento">
+		<div class="panel-heading">
+		    <h3 class="panel-title">REQUISITANTE - AVALIAR ATENDIMENTO</h3>
+		</div>
+		<div class="panel-body">		
+			<div class="row">				
+					<div class="form-group col-md-2">	
+						<label for="atividade">Faturar serviço? </label>												  					
+					</div>
+					<div class="form-group col-md-2">						
+						<input type="radio" id="faturarSim" name="faturar" value="sim"> Sim 
+						<input type="radio" id="faturarNao" name="faturar" value="nao" checked> Não					  					
+					</div>				
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsReqRelatorio">Comentários/Observações</label>
+					<textarea rows="4" name="obsReqRelatorio" id="obsReqRelatorio" class="form-control"></textarea>
+				</div>
+			</div>				
+		</div>
+	</div>
+	<!-- REQUISITANTE - AVALIAR ATENDIMENTO -->
+	
+	<!-- DEPARTAMENTO FINANCEIRO-->
+	<div class="panel panel-primary" id="dptoFinanceiro">
+		<div class="panel-heading">
+		    <h3 class="panel-title">DEPARTAMENTO FINANCEIRO</h3>
+		</div>
+		<div class="panel-body">
+			<div class="row">
+				<div class="form-group col-md-8">
+					<label for="nomeDptoFinanceiro">Nome do solicitante<span class="obrigatorio" name="obrigatorio" > *</span></label>
+					<input type="text" name="nomeDptoFinanceiro" id="nomeDptoFinanceiro" class="form-control" readonly>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="dataDptoFinanceiro">Data da solicitação<span class="obrigatorio" name="obrigatorio" > *</span></label>
+					<input type="text" name="dataDptoFinanceiro" id="dataDptoFinanceiro" class="form-control" readonly>
+				</div>
+				<!-- <div class="form-group col-md-4"> -->
+					<!-- <label for="statusDptoFinanceiro">Status</label> -->
+					<!-- <input type="text" name="statusDptoFinanceiro" id="statusDptoFinanceiro" class="form-control"> -->
+				<!-- </div> -->
+			</div>
+			<div class="row">
+				<div class="form-group col-md-12">
+					<label for="obsDptoFinanceiro">Comentários/Observações</label>
+					<textarea rows="4" name="obsDptoFinanceiro" id="obsDptoFinanceiro" class="form-control"></textarea>
+				</div>
+			</div>			
+		</div>
+	</div>
+	<!-- DEPARTAMENTO FINANCEIRO -->
+</form>
+</div>
+</body>
+<script>
+$(document).ready(function(){
+	console.log("Valor chebocks DocT: " + document.getElementById("docTrabOK___1").value);
+
+var atividade = $("#IdAtivi").val();
+
+console.log(atividade);
+
+if(atividade == 0 || atividade == 3){
+	
+var x = DatasetFactory.getDataset("Cadastro de Cliente - Oportunidade - Contratos",null,null,null); 
+
+console.log(x.values[0].numProlux2);
+
+for(var i=0;i<x.values.length;i++){ if(x.values[i].numProlux2 != "" && x.values[i].numProlux2 != null){
+	
+	$("#numProlux").append("<option value='"+x.values[i].numProlux2 +"'>"+x.values[i].numProlux2 +"</option>");
+	};
+}
+}
+});
+</script>
+<script type="text/javascript">
+	//var calendarioDataRequisitante = FLUIGC.calendar('#dataSolRequisitante');
+	var calendarioDataExecucao = FLUIGC.calendar('#dataExecucao');
+	//var calendarioDataResponsavel = FLUIGC.calendar('#dataResponsavel');
+	//var calendarioDataResponsavel = FLUIGC.calendar('#dataResponsavel2');
+</script>
+<script>
+	function addPaiFilho(){
+	console.log("Entrou ADD Pai Filho");
+	 wdkAddChild('tbOrcamento');
+	("[name*='vlr_orcamento___']").each(function() {
+	 $(this).keyup(function(event) {
+	 mostrarDiv();
+	 });
+	
+	});
+	} 
+	function fnCustomDelete(oElement){ 
+		// Chamada a funcao padrao, NAO RETIRAR    
+		fnWdkRemoveChild(oElement);
+		totalizaValor(); 
+	}
+	function SetaVal(elemento){
+		var indice = elemento.id.split("___")[1];
+		
+		if ($("#docTrabOK___"+indice).val() == "ok") {
+			
+			$("#docTrabOK___"+indice).val("no");
+			
+		}else{
+			
+			$("#docTrabOK___"+indice).val("ok");
+		}
+	}	
+</script>
+<script>
+$("#docTrabalho").click(function(){
+	if($(this).val()=="true"){
+		$("#esconde2").css("visibility","hidden");
+		$(this).val("false");
+		}
+		else{
+				$("#esconde2").css("visibility","visible");
+				$(this).val("true");
+			}	
+	});
+</script>
+<script>
+$("#docTecnico").click(function(){
+	if($(this).val()=="true"){
+		$("#esconde").css("visibility","hidden");
+		$(this).val("false");
+		}
+		else{
+				$("#esconde").css("visibility","visible");
+				$(this).val("true");
+			}	
+	});
+</script>
+<script>
+
+//GUARDA O VALOR DO "ID" DO INPUT ZOOM(executor) EM UM INPUT HIDDEN
+function setSelectedZoomItem(selectedItem) {	
+	if (selectedItem.inputName == "responsavel") {
+	document.getElementById("idResponsavel").value = selectedItem['colleagueId'];
+	}
+	if (selectedItem.inputName == "executor") {
+	document.getElementById("idExecutor").value = selectedItem['colleagueId'];
+	}
+}
+</script>
+<script>
+	function mudarDocTec(esconde) {
+        var display = document.getElementById('esconde').style.display;
+        if(display == "none"){
+            document.getElementById('esconde').style.display = 'block';
+        }
+        else{
+            document.getElementById('esconde').style.display = 'none';
+        }
+    }
+	
+	function mudarDocTra(esconde2) {
+        var display = document.getElementById('esconde2').style.display;
+        if(display == "none")
+            document.getElementById('esconde2').style.display = 'block';
+        else
+            document.getElementById('esconde2').style.display = 'none';
+    }
+</script>
+<script type="text/javascript">
+function Tiraok() {
+	if ($("#docOK").val() == "ok") {
+		$("#docOK").val("no");
+	}else{
+		$("#docOK").val("ok");
+	}
+	
+}
+</script>
+
+
+
+</html>

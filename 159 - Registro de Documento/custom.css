@@ -1,0 +1,61 @@
+div#logo {
+	display: inline-block; 
+	float: right; 
+}
+
+.control-label {
+    font-size: 1.1em;
+}
+#KitGestaoQualidade #logo {
+    float: right;
+    width: 10%;
+    text-align: right;
+}
+#KitGestaoQualidade h2 {
+    border: none;
+    background-color: white;
+    font-size: 22px;
+    float: left;
+    clear: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 90%;
+}
+#KitGestaoQualidade h2 + form {
+    clear: both;
+    padding-top: 10px;
+}
+
+legend {
+	font-weight: normal !important;
+	font-size: 17px !important;
+}
+
+fieldset {
+	padding-bottom: 20px !important;
+}
+
+/* CSS para botoes inferiores */
+.input-group.input-group-sm > input {
+    border-radius: 5px 5px 0px 0px !important;
+    background: #fff;
+}
+.input-group.input-group-sm > a:nth-child(2) {
+    float: left;
+    width: 50% !important;
+    height: 25px;  
+    border-radius: 0px 0px 0px 5px;
+}
+.input-group.input-group-sm > a:nth-child(3) {
+    float: left;
+    width: 50% !important;
+    height: 25px;
+    border-radius: 0px 0px 5px 0px;
+}
+
+label.radio-inline {
+    font-size: 13px;
+}
+label {
+    font-size: 13px;
+}

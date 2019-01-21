@@ -1,0 +1,121 @@
+div#logo {
+	display: inline-block; 
+	float: right; 
+}
+
+.control-label {
+    font-size: 1.1em;
+}
+#KitGestaoQualidade #logo {
+    float: right;
+    width: 10%;
+    text-align: right;
+}
+#KitGestaoQualidade h2 {
+    border: none;
+    background-color: white;
+    font-size: 22px;
+    float: left;
+    clear: none;
+    padding-bottom: 10px;
+    padding-top: 10px;
+    width: 90%;
+}
+#KitGestaoQualidade h2 + form {
+    clear: both;
+    padding-top: 10px;
+}
+
+legend {
+	font-weight: normal !important;
+	font-size: 17px !important;
+}
+
+fieldset {
+	padding-bottom: 20px !important;
+}
+
+/* CSS para botoes inferiores */
+.input-group.input-group-sm > input {
+    border-radius: 5px 5px 0px 0px !important;
+    background: #fff;
+}
+.input-group.input-group-sm > a:nth-child(2) {
+    float: left;
+    width: 50% !important;
+    height: 25px;  
+    border-radius: 0px 0px 0px 5px;
+}
+.input-group.input-group-sm > a:nth-child(3) {
+    float: left;
+    width: 50% !important;
+    height: 25px;
+    border-radius: 0px 0px 5px 0px;
+}
+
+
+/******************************  Ishikawa *******************************/
+.tdPrincipalSuperior {
+	padding:5px;
+	background:url('../img/up_first.png') center no-repeat; 
+	padding-left:20px
+}
+
+.tdSecundarioSuperior{
+	padding:5px;
+	background:url('../img/up_second.png') center no-repeat; 
+	padding-left:50px
+}
+
+.tdSecundarioInferior{
+	padding:5px;
+	background:url('../img/down_second.png') center no-repeat; 
+	padding-left:50px
+}
+
+.tdPrincipalInferior{
+	padding:5px;
+	background:url('../img/down_first.png') center no-repeat; 
+	padding-left:20px
+}
+
+.dsPrincipal{
+	height:70;
+	width:180;
+	margin-left:1px;
+}
+
+.dsCincopqCausaRaiz{
+	height:70;
+	width:360;
+	margin-left:1px;
+}
+
+.dsSecundario{
+	height:50;
+	width:180;
+	margin-left:20px;
+}
+
+.tdCenterRow{
+	background:url('../img/center.png') center no-repeat;
+	height: 3px;
+}
+
+@media (max-width: 765px) {
+	#logo {
+		text-align: left !important;
+	}
+}
+
+.row { /* more top and bottom padding on rows */
+	padding: 20px 0;
+}
+
+
+label.radio-inline {
+    font-size: 13px;
+}
+label {
+    font-size: 13px;
+}

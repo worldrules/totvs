@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+	xmlns:ws="http://ws.dm.ecm.technology.totvs.com/">
+	<soapenv:Header />
+	<soapenv:Body>
+		<ws:create>
+			<companyId></companyId>
+			<username></username>
+			<password></password>
+			<card>
+				<!--Zero or more repetitions: -->
+				<item>
+					<!--Optional: -->
+					<!--Zero or more repetitions: -->
+					<attachs>
+					</attachs>
+					<!--Optional: -->
+					<colleagueId></colleagueId>
+					<!--Zero or more repetitions: -->
+					<docapprovers>
+					</docapprovers>
+					<!--Zero or more repetitions: -->
+					<docsecurity>
+					</docsecurity>
+					<parentDocumentId></parentDocumentId>
+					<!--Zero or more repetitions: -->
+					<reldocs>
+					</reldocs>
+				</item>
+			</card>
+		</ws:create>
+	</soapenv:Body>
+</soapenv:Envelope>

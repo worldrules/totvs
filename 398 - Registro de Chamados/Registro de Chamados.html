@@ -1,0 +1,124 @@
+<html>
+<head>
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" charset="utf-8"></script>
+	<script type="text/javascript" src="registroDeChamados.js"></script>
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script> 
+</head>
+<body id="KitGestaoQualidade" onload="window.parent.document.getElementById('workflowView-cardViewer').style.border='none';">
+<div class="fluig-style-guide"></div>
+
+	<h1>Registro de Chamados **</h1>
+	<div class="container">
+
+	<form name="form" role="form">
+
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label for="nrChamado">Nr Chamado</label>			
+				<input type="text" id="nrChamado" name="nrChamado"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="solicitante">Solicitante</label>			
+				<input type="text" id="solicitante" name="solicitante"  class="form-control" readonly></input>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="dataSolicitacao">Data da Solicitação</label>			
+				<input type="text" id="dataSolicitacao" name="dataSolicitacao"  class="form-control dateFormat" readonly></input>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-6">
+				<label for="assunto">Assunto</label>			
+				<input type="text" id="assunto" name="assunto"  class="form-control"></input>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="centroCusto">Centro de Custo</label>			
+				<input type="text" id="centroCusto" name="centroCusto"  class="form-control"></input>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="prioridade">Prioridade</label>			
+				<select id="prioridade" name="prioridade"  class="form-control">
+					<option disabled selected value>Selecione uma prioridade</option>
+					<option value="alta">Alta</option>
+					<option value="media">Media</option>
+					<option value="baixa">Baixa</option>
+				</select>
+			</div>
+		</div>
+
+		<!-- alteracao leo -->
+		<!-- <div class="row">
+			<div class="form-group col-sm-12">
+				<label for="cc">CC.</label>			
+				<input type="text" id="cc" name="cc"  class="form-control"  placeholder="Tecle Enter ou digite &quot,&quot ao final de cada e-mail informado."></input>
+			</div>
+		</div> -->
+
+		<div class="row">
+			<div class="form-group col-sm-6">
+				<label for="envioPara">Envio Para</label>			
+				<select id="envioPara" name="envioPara" dataset="group" datasetkey="groupId" datasetvalue="groupDescription" addBlankLine="true" class="form-control"></select>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="responsavel">Responsavel</label>			
+				<select id="responsavel" name="responsavel"  class="form-control"><option></option></select>
+			</div>
+		</div>
+
+		<div class="row">
+			<label for="descChamado">Descrição do Chamado</label>
+			<textarea class="form-control" name="descChamado" id="descChamado" cols="28" rows="8"></textarea>
+		</div>
+	</div> <!--Fim do Container Principal-->
+	
+	<!--Container Area Responsável-->
+	<div id="areaResponsavel" class="container" style="display:none;">
+		<h2>Area Responsavel</h2>
+		<div class="row">
+			<div class="form-group col-sm-6">
+				<label for="responsavelFormArea">Responsavel</label>			
+				<select id="responsavelFormArea" name="responsavelFormArea"  class="form-control"><option></option></select>
+			</div>
+			<div class="form-group col-sm-6 ">
+				<label for="dataResponsavel">Data</label>			
+				<input type="text" id="dataResponsavel" name="dataResponsavel"  class="form-control dateFormat"></input>
+			</div>
+		</div>
+		<div class="row">
+			<div class="form-group col-sm-3">
+				<label for="status">Status</label>			
+				<select class="form-control" id="status" name="status">
+					<option value="novoPrazo">Novo Prazo</option>
+					<option value="concluido">Concluido</option>
+				</select>
+			</div>
+			<div class="form-group col-sm-3">
+				<label for="novoPrazo">Novo Prazo</label>			
+				<input type="text" id="novoPrazo" name="novoPrazo"  class="form-control dataHoraFormat"></input>
+			</div>
+			<div class="form-group col-sm-6">
+				<label for="comentario">Comentario</label>			
+				<textarea id="comentario" name="comentario"  class="form-control" rows="6"></textarea>
+			<div>
+		</div>
+	<div>
+	<div id="areaFinal" class="container" style="display:none">
+		<div class="row">
+			<div class="form-group col-sm-12">
+				<label for="finalizar">Finalizar</label>			
+				<select class="form-control" id="finalizar" name="finalizar">
+					<option value="finalizado">Finalizar</option>
+					<option value="realizarSolicitacao">Realizar Solicitação</option>
+				</select>
+			</div>
+		</div>
+	<div>
+</form>
+</div>
+</body>
+</html>

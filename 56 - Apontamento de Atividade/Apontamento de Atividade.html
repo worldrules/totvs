@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://rawgit.com/mplatt/fold-to-ascii/eae6030cc155a59fe7859666b4fb45171c67a17f/fold-to-ascii.js"></script>
+
+	<!-- MASCARA PARA CAMPOS DENTRO DA TABELA PAI-FILHO -->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.15/jquery.mask.min.js" charset="utf-8"></script>	
+	
+	<!-- CHAMA FUNCOES -->
+	<script type="text/javascript" src="funcoes.js"></script>
+	
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+	<script type="text/javascript" href="ECMCardServiceCreate.xml"></script>
+</head>
+
+<body>
+
+<style> 
+	.obrigatorio 
+	{ 
+	color:red; 
+	}
+</style>
+
+<div class="fluig-style-guide">
+	<form name="form" role="form">
+	
+		<!-- SWIMLANE: TECNICO -->
+		<!-- ATOR: INICIO - FORMULARIO DE CADASTRO -->
+		<div class="panel panel-primary" id="regApontamento">
+			<div class="panel-heading">
+				<h3 class="panel-title" >REGISTRO DE APONTAMENTO</h3>
+			</div>
+			<div class="panel-body">				
+				<div class="row">
+					<div class="form-group col-md-5">
+						<label for="nomeSolicitante">Nome do Solicitante</label>
+						<input type="text" name="nomeSolicitante" id="nomeSolicitante" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-5">
+						<label for="dataInicio">Data de Inicio</label>
+						<input type="text" mask="00/00/0000"  name="dataInicio" id="dataInicio" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-12">					
+						<table  tablename="listaAtividade" id="listaAtividade" noaddbutton="true" nodeletebutton="true" colspan="1" class="table table-condensed table-striped" >
+							<thead>
+								<tr>
+									<th class="text-left">
+										<label for="cc">CC</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="hh">Atividade</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="dataAtividade">Data</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="horaInicio">Início</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="horaFim">Fim</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="tempoAtividade">Tempo</label><span class="obrigatorio" > *</span>
+									</th>
+									<th class="text-left">
+										<label for="obsAtividade">Observações</label>
+									</th>									
+									<th class="text-left" >
+										<span class="fluigicon fluigicon-plus-sign fluigicon-lg" id="addOrcamento" alt='adicionar_linha' title='Adicionar Orçamento' style="cursor: pointer;" onclick="addTask();"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style="width:20%">
+										<input
+												type="zoom"
+												id = "cc"
+												name="cc"
+												data-zoom="{
+													'displayKey':'centroCusto2',
+													'datasetId':'Cadastro de Cliente - Oportunidade - Contratos',
+													'filterValues':'metadata_active,true',
+													'placeholder':'Escolha o CC',
+													'fields':[
+														{
+														   'field':'centroCusto2',
+														   'label':'Centro de Custo',
+														   'standard':'true'
+														}
+													]
+												}"
+										/>
+									</td>
+									<td style="width:20%">
+										<select type="text" name="atividade" id="atividade" class="form-control" >
+											<!-- <option value="Selecione..." disabled>Selecione...</option> --> 
+										</select>
+										<input type="hidden" name="horaHomem" id="horaHomem">
+									</td>
+									<td style="width:13%">										
+										<input type="date"  name="dataAtividade" id="dataAtividade" class="form-control" >
+									</td>
+									<td style="width:8%">										
+										<input type="text"  name="horaInicio" id="horaInicio" class="form-control horaFormat calculaTempo" placeholder=" 00:00" onchange="calcula(this)"  >
+									</td>
+									<td style="width:8%">										
+										<input type="text"  name="horaFim" id="horaFim" class="form-control horaFormat calculaTempo" placeholder="00:00" onchange="calcula(this)" >
+									</td>
+									<td style="width:8%">
+										<!-- <button id="calc" type="button" class="btn btn-info" >calcular</button> -->
+										<input type="text"  name="tempoAtividade" id="tempoAtividade" class="form-control horaFormat" placeholder="00:00"  readonly >										
+									</td> 
+									<td style="width:20%">
+										<input type="hidden" name="funcionario" id="funcionario">
+										<textarea rows="4" name="obsAtividade" id="obsAtividade" class="form-control" placeholder="Digite a Observação"></textarea>										
+									</td>
+									<td class="text-right" style="width:7%">
+										<span class="fluigicon fluigicon-minus-sign fluigicon-lg" id="removeOrcamento" alt='remover_linha' title='Remover Orçamento' onclick="fnCustomDelete(this)" style="cursor: pointer;" ></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>				
+				</div>
+			</div>
+		</div>
+		<!-- SWIMLANE: TECNICO -->
+		<!-- ATOR: INICIO - FORMULARIO DE CADASTRO -->
+		
+		<!-- SWIMLANE: LIDER IMEDIATO -->
+		<!-- ATOR: APROVA APONTAMENTOS -->
+		<div class="panel panel-primary" id="aprApontamento">
+			<div class="panel-heading">
+				<h3 class="panel-title">APROVAÇÃO DE APONTAMENTO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-5">
+						<label for="nomeAprovador">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeAprovador" id="nomeAprovador" class="form-control">
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataAprovador">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataAprovador" id="dataAprovador" class="form-control">
+					</div>
+					<div class="form-group col-md-3">
+						<label>Apontamento está correto?<span class="obrigatorio" > *</span></label></br>
+						<select class="form-control" id="apontamento" name="apontamento">
+							<option value="sim">Aprovar</option>
+							<option value="nao">Reprovar</option>
+						</select>
+					</div>
+				</div>				
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsAprovador">Comentários/Observações</label>
+						<textarea rows="4" name="obsAprovador" id="obsAprovador" class="form-control"></textarea>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- SWIMLANE: LIDER IMEDIATO -->
+		<!-- ATOR: APROVA APONTAMENTOS -->		
+	</form>
+</div>
+</body>
+
+
+
+
+
+
+</html>

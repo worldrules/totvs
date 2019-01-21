@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<link type="text/css" rel="stylesheet" href="/portal/resources/style-guide/css/fluig-style-guide.min.css"/>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/jquery/jquery-ui.min.js"></script>
+	<script type="text/javascript" src="/portal/resources/js/mustache/mustache-min.js"></script>
+	<script type="text/javascript" src="/portal/resources/style-guide/js/fluig-style-guide.min.js" charset="utf-8"></script>		
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://rawgit.com/mplatt/fold-to-ascii/eae6030cc155a59fe7859666b4fb45171c67a17f/fold-to-ascii.js"></script>
+
+	<!-- DIV TOGGLE -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!-- DIV TOGGLE -->	
+
+	<script type="text/javascript" src="/webdesk/vcXMLRPC.js"></script>
+	<script type="text/javascript" href="ECMCardServiceCreate.xml"></script>
+	
+	<!-- PAGINA DE FUNÇÕES -->
+	<script src="funcoes.js"></script>
+	<!-- PÁGINA DE ESTILO CSS -->
+	<link rel="stylesheet" href="style.css">	
+</head>
+<body>
+<div class="fluig-style-guide">
+	<form name="form" role="form" enctype="multipart/form-data">
+		<!-- SWIMLANE: REQUISITANTE/VENDAS -->
+		<!-- ATOR: REQUISITANTE -->		
+		<div class="panel panel-primary" id="requisitante" >
+			<div class="panel-heading">
+				<h3 class="panel-title">Registro e Controle de Oportunidades  (RQ16)</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="nomeCliente">Nome do Cliente<span class="obrigatorio"> *</span></label>	
+						<!-- \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ 
+						OBS: AO SELECIONAR O CAMPO CLIENTE, OS DEMAIS CAMPOS SÃO PREENCHIDOS AUTOMATICAMENTE COM A FUNÇÃO SET SELECTED
+						\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ -->						
+						<input onchange="setSelectedZoomItem();"
+								type="zoom" 
+								id = "nomeCliente"
+								name="nomeCliente"
+								data-zoom="{
+									'displayKey':'nomeCadCli2',
+									'datasetId':'dsNovoCliente',
+									'fields':[
+										{
+											'field':'nomeCadCli2',
+											'label':'Nome'
+										}
+									]
+								}"  
+						/>					
+					</div>
+					<div class="form-group col-md-3">
+						<label for="nomeContato">Contato Cliente<span class="obrigatorio"> *</span></label>											
+						<select type="text" name="nomeContato" id="nomeContato" onchange="preencherCampos();" class="form-control " >
+							<!-- <option value="Selecione...">Selecione...</option>  -->
+						</select>					
+					</div>
+					
+					<!-- <div class="form-group col-md-3">
+						<label for="contatoCadEmp">Empresa<span class="obrigatorio" > *</span></label>
+						<input type="text" name="contatoCadEmp" id="contatoCadEmp" class="form-control contatoCadEmp" readonly>
+					</div> -->					
+					<div class="form-group col-md-3">
+						<label for="contatoCadTel">Telefone<span class="obrigatorio" > *</span></label>
+						<input type="text" name="contatoCadTel" id="contatoCadTel" class="form-control contatoCadTel"  >
+						<input type="hidden" name="NumAtividade" id="NumAtividade" class="form-control" >
+					</div>					
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="contatoCadEmail">E-mail<span class="obrigatorio" > *</span></label>
+						<input type="text" name="contatoCadEmail" id="contatoCadEmail" class="form-control contatoCadEmail">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="contatoTecnico">Contato Técnico</label>
+						<select type="text" name="contatoTecnico" id="contatoTecnico"  class="form-control " >
+							<!-- <option value="Selecione...">Selecione...</option>  -->
+						</select>						
+					</div>
+					<div class="form-group col-md-3">
+						<label for="contatoFinanceiro">Contato Financeiro</label>
+						<select type="text" name="contatoFinanceiro" id="contatoFinanceiro"  class="form-control " >
+							<!-- <option value="Selecione...">Selecione...</option>  -->
+						</select>						
+					</div>
+					<div class="form-group col-md-3">
+						<label for="contatoComercial">Contato Comercial</label>	
+						<select type="text" name="contatoComercial" id="contatoComercial"  class="form-control " >
+							<!-- <option value="Selecione...">Selecione...</option>  -->
+						</select>						
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="numProlux">Número PROLUX<span class="obrigatorio" > *</span></label>									
+						<select  name="numProlux" id="numProlux" class="form-control" dataset="dsNumeroProlux" datasetkey="id" datasetvalue="descricao" onchange="numeroProlux()"></select>				
+					</div>
+					<div class="form-group col-md-3 collapse" id="numProlux2">
+						<label for="numProlux2">Número proposta</label>					
+						<input type="text" name="numProlux2" id="numProlux2" class="form-control" >
+					</div>
+					<div class="form-group col-md-3">
+						<input type="hidden" name="nomeContato2" id="nomeContato2" class="form-control" >
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="regTipo">Tipo<span class="obrigatorio"> *</span></label>
+						<select  name="regTipo" id="regTipo" class="form-control" addblankline="true"  dataset="dsCadTiposForm" datasetkey="CadTipo" datasetvalue="CadTipo" onChange="FiltraItens()"></select>					
+					</div>
+					<div class="form-group col-md-3" id="DIVITEM">
+						<label for="desItem">Descrição do Item<span class="obrigatorio"> *</span></label>
+						<select  name="desItem" id="desItem" class="form-control"></select>					
+					</div>										
+					<div class="form-group col-md-3">
+						<label for="regUF">Estado (UF)<span class="obrigatorio"> *</span></label>
+						<select  name="regUF" id="regUF" class="form-control" dataset="dsEstadosBrasil" datasetkey="uf" datasetvalue="uf"></select>					
+					</div>									
+				</div>
+				<div class="row">
+					<div class="form-group col-md-4">
+						<label for="regVendedor">Vendedor<span class="obrigatorio"> *</span></label>				
+						<input
+								type="zoom"
+								id = "regVendedor"
+								name="regVendedor"
+								data-zoom="{
+									'displayKey':'nome',
+									'datasetId':'dsVendedores',
+									'placeholder':'Escolha o vendedor',
+									'fields':[
+										{
+										   'field':'nome',
+										   'label':'Nome'
+										}
+									]
+								 }"
+						/>
+						
+						<input type="hidden" id="idRegVendedor" name="idRegVendedor">
+					</div>
+					<div class="form-group col-md-4 collapse">
+						<label for="regOrcamentista">Orçamentista<span class="obrigatorio"> *</span></label>				
+						<input
+								type="zoom"
+								id = "regOrcamentista"
+								name="regOrcamentista"
+								data-zoom="{
+									'displayKey':'nome',
+									'datasetId':'dsOrcamentista',
+									'placeholder':'Escolha o Orçamentista',
+									'fields':[
+										{
+										   'field':'nome',
+										   'label':'Nome'
+										}
+									]
+								 }"
+						/>
+						<input type="hidden" id="idregOrcamentista" name="idregOrcamentista">
+						<input type="hidden" id="idRegVendOrc" name="idRegVendOrc">
+					</div>
+				</div>
+				<div class="row collapse">
+					<div class="form-group col-md-3">
+						<label for="aceiteProposta">Proposta aceita<span class="obrigatorio" > *</span></label></br>
+						<input type="radio" id="aceiteProposta" name="aceiteProposta" value="sim"> Sim 
+						<input type="radio" id="aceiteProposta" name="aceiteProposta" value="nao"> Não	
+					</div>	
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="regResumo">Resumo</label>					
+						<input type="text" name="regResumo" id="regResumo" class="form-control" >
+					</div>
+					<div class="form-group col-md-12">
+						<label for="regDescricao">Descrição</label>					
+						<textarea rows="4" name="regDescricao" id="regDescricao" class="form-control"></textarea>
+					</div>				
+				</div>
+				<div class="row">					
+					<div class="form-group col-md-3">
+						<label for="regDtInicial">Data Atual<span class="obrigatorio"> *</span></label>					
+						<!--  <input type="text" name="regDtInicial" id="regDtInicial" class="form-control" >-->
+						<input type="text" id="dataAtual" name="dataAtual" class="form-control" readonly/>
+					</div>
+					<div class="form-group col-md-3">
+						<label for="regValorBruto">Valor bruto<span class="obrigatorio"> *</span></label>					
+						<input type="text" name="regValorBruto" id="regValorBruto" class="form-control"  mask="#00.000.000.000.000,00">
+					</div>
+					<div class="form-group col-md-3">
+						<label for="regDtExpCompra">Expectativa compra<span class="obrigatorio"> *</span></label>					
+						<input type="text" name="regDtExpCompra" id="regDtExpCompra" class="form-control" >
+					</div>
+					<div class="form-group col-md-3">
+						<label for="regVendaConv">Venda convencional<span class="obrigatorio"> *</span></label>
+						<select type="text" name="regVendaConv" id="regVendaConv" class="form-control " >
+							<option value="Selecione...">Selecione...</option>
+							<option value="sim">Sim</option> 
+							<option value="nao">Não</option> 
+						</select>
+					</div>					
+				</div>
+				<div class="row">					
+					<div class="form-group col-md-3" id="divStats">
+						<label for="regStatus">Status<span class="obrigatorio"> *</span></label>
+						<select  name="regStatus" id="regStatus" class="form-control" dataset="dsOportunidadeStatus" datasetkey="descricao" datasetvalue="descricao" ></select>
+					</div>
+					<div class="form-group col-md-3 collapse2">
+						<label for="regDtFollowUp">Data para Follow up<span class="obrigatorio"> *</span></label>					
+						<input type="text" name="regDtFollowUp" id="regDtFollowUp" class="form-control" >
+					</div>
+					<div class="form-group col-md-6" id="DivDatOrc">
+						<div class="row collapse">
+							<div class="form-group col-md-6">
+								<label for="prazoOrc">Prazo Orçamento/Passagem</label>
+								<input type="text" name="prazoOrc" id="prazoOrc" class="form-control" >
+							</div>											
+							<div class="form-group col-md-6" id="DivDatPass" style="display:none">
+								<label for="prazoPass" >Data prevista para conclusão da Passagem</label>
+								<input type="text" name="prazoPass" id="prazoPass" class="form-control" >
+							</div>	
+						</div>					
+					</div>			
+				</div>
+				<div class="row collapse2">				
+					<div class="form-group col-md-9">
+						<label for="regDescricaoFollowUp">Descrição Follow up</label>					
+						<textarea rows="4" name="regDescricaoFollowUp" id="regDescricaoFollowUp" class="form-control"></textarea>
+					</div>													
+				</div>									
+			</div>
+		</div>
+		<!-- SWIMLANE: REQUISITANTE/VENDAS -->
+		<!-- ATOR: REQUISITANTE -->		
+		
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: ORÇAMENTO -->	
+		<div class="panel panel-primary" id="solicitante_orcamento">
+			<div class="panel-heading">
+				<h3 class="panel-title">ORÇAMENTO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-2">	
+						<label for="nomeAnexo1">Anexar proposta</label></br>
+						<button id="nomeAnexo1" name="nomeAnexo1" type="button" class="btn btn-default" onclick="showCamera();">Selecione um arquivo</button>											
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-8">
+						<label for="nomeSolicitante">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeSolicitante" id="nomeSolicitante" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataSolicitante">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataSolicitante" id="dataSolicitante" class="form-control" readonly>
+					</div>				
+				</div>	
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsSolicitante">Proposta/Comentários/Observações</label>
+						<textarea rows="4" name="obsSolicitante" id="obsSolicitante" class="form-control"></textarea>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: ORÇAMENTO -->		
+		
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: PASSAGEM DE CONTRATO - ETAPA COMERCIAL -->
+		<div class="panel panel-primary" id="passagem_contrato">
+			<div class="panel-heading">
+				<h3 class="panel-title">PASSAGEM DE CONTRATO - ETAPA COMERCIAL - ANEXOS</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-12">	
+						<label for="nomeAnexo1">Inserir documentação: Tabela de preços, Proposta comercial, Ordem de compra e/ou contrato</label><span class="obrigatorio" > *</span></br>
+						<button type="button" id="nomeAnexo2" name="nomeAnexo2" class="btn btn-default" onclick="showCamera2();">Selecione um arquivo</button>											
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-8">
+						<label for="nomeSolicitante2">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeSolicitante2" id="nomeSolicitante2" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataSolicitante2">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataSolicitante2" id="dataSolicitante2" class="form-control" readonly>
+					</div>								
+				</div>	
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsSolicitante2">Comentários/Observações</label>
+						<textarea rows="4" name="obsSolicitante2" id="obsSolicitante2" class="form-control"></textarea>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: PASSAGEM DE CONTRATO - ETAPA COMERCIAL -->
+		
+		<!-- SWIMLANE: GESTÃO EOS -->
+		<!-- ATOR: ENGENHARIA -->
+		<div class="panel panel-primary" id="avaliacao_contrato">
+			<div class="panel-heading">
+				<h3 class="panel-title">ENGENHARIA - AVALIAÇÃO DO CONTRATO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">					
+					<div class="form-group col-md-12">
+						<label for="regComentario">Comentários</label>					
+						<textarea rows="4" name="regComentario" id="regComentario" class="form-control"></textarea>
+					</div>								
+				</div>			
+				<div class="row">
+					<div class="form-group col-md-12">
+							<label for="regAdmin">Selecione o administrador do contrato<span class="obrigatorio"> *</span></label>					
+							<input
+									type="zoom"
+									id = "regAdmin"
+									name="regAdmin"
+									data-zoom="{
+										'displayKey':'colleagueName',
+										'datasetId':'colleague',
+										'placeholder':'Escolha o administrador',
+										'fields':[
+											{
+											   'field':'colleagueName',
+											   'label':'Nome'
+											},{
+											   'field':'colleagueId',
+											   'label':'Código'
+											}
+										]
+									 }"
+							/>
+							<input type="hidden" id="idRegAdmin" name="idRegAdmin">
+					</div>
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+							<label for="regTecContrato">Selecione o responsável técnico do contrato<span class="obrigatorio"> *</span></label>					
+							<input
+									type="zoom"
+									id = "regTecContrato"
+									name="regTecContrato"
+									data-zoom="{
+										'displayKey':'colleagueName',
+										'datasetId':'colleague',
+										'placeholder':'Escolha o técnico',
+										'fields':[
+											{
+											   'field':'colleagueName',
+											   'label':'Nome'
+											},{
+											   'field':'colleagueId',
+											   'label':'Código'
+											}
+										]
+									 }"
+							/>
+							<input type="hidden" id="idRegTecContrato" name="idRegTecContrato">
+					</div>
+				</div>
+			</div>	
+		</div>
+		<!-- SWIMLANE: GESTÃO EOS -->
+		<!-- ATOR: ENGENHARIA -->
+		
+		<!-- SWIMLANE: ADM CONTRATO -->
+		<!-- ATOR: ADMINISTRADOR DO CONTRATO -->
+		<div class="panel panel-primary" id="admin_contrato">
+			<div class="panel-heading">
+				<h3 class="panel-title">ADMINISTRADOR DO CONTRATO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-5">
+						<label for="documentacao">Status da documentação?<span class="obrigatorio" > *</span></label></br>
+						<input type="radio" id="documentacaoAprovada" name="documentacao" value="aprovada"> Aprovada 
+						<input type="radio" id="documentacaoRessalva" name="documentacao" value="ressalva"> Aprovada com ressalva	
+						<input type="radio" id="documentacaoReprovada" name="documentacao" value="reprovada"> Reprovada	
+					</div>
+					<div class="form-group col-md-6">
+						<label for="regContrato">Contrato é viável?<span class="obrigatorio"> *</span></label></br>
+						<input type="radio" id="regContrato" name="regContrato" value="sim"> Sim 
+						<input type="radio" id="regContrato" name="regContrato" value="nao"> Não					
+					</div>
+					
+				</div>
+				<div class="row">
+					<div class="form-group col-md-5">
+						<label for="nomeAdmin">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeAdmin" id="nomeAdmin" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataAdmin">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataAdmin" id="dataAdmin" class="form-control" readonly>
+					</div>
+					
+				</div>	
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsAdmin">Comentários/Observações</label>
+						<textarea rows="4" name="obsAdmin" id="obsAdmin" class="form-control"></textarea>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- SWIMLANE: ADM CONTRATO -->
+		<!-- ATOR: ADMINISTRADOR DO CONTRATO -->
+		
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: REVISAR DOCUMENTAÇÃO -->
+		<div class="panel panel-primary" id="revisar_documentacao">
+			<div class="panel-heading">
+				<h3 class="panel-title">REVISÃO DA DOCUMENTAÇÃO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-8">
+						<label for="nomeRevisor">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeRevisor" id="nomeRevisor" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataRevisor">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataRevisor" id="dataRevisor" class="form-control" readonly>
+					</div>								
+				</div>	
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsRevisor">Comentários/Observações</label>
+						<textarea rows="4" name="obsRevisor" id="obsRevisor" class="form-control"></textarea>
+					</div>
+				</div>	
+			</div>
+		</div>
+		<!-- SWIMLANE: ORÇAMENTO -->
+		<!-- ATOR: REVISAR DOCUMENTAÇÃO -->
+		
+		<!-- SWIMLANE: ADM CONTRATO -->
+		<!-- ATOR: CRIAR LISTA DE ATIVIDADES E MATERIAIS -->
+		<div class="panel panel-primary" id="lista_atividade">
+			<div class="panel-heading">
+				<h3 class="panel-title">CRIAR LISTA DE ATIVIDADES E MATERIAIS</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-3">
+						<label for="aceiteProposta">CC cadastrado no SAP? <span class="obrigatorio" > *</span></label></br>
+						<input type="radio" id="CCSAPS" name="CCSAP" value="sim" onChange="MostraCC()"> Sim 
+						<input type="radio" id="CCSAPN" name="CCSAP" value="nao" onChange="MostraCC()"> Não	
+					</div>
+				</div>
+				<div class="row" id="DivCCSap" style="display: none">
+					<div class="form-group col-md-6">
+						<input class="form-group col-md-6"
+												type="zoom"
+												id = "CentrodeCusto"
+												name="CentrodeCusto"
+												data-zoom="{
+													'displayKey':'PrjName',
+													'datasetId':'ds_CentroCusto',
+													'placeholder':'Escolha...',
+													'fields':[
+														{
+														   'field':'PrjCode',
+														   'label':'Código'
+														},
+														{
+															'field':'PrjName',
+														   'label':'Nome'
+														}
+													]
+												 }"
+										/>
+							</div>
+				</div> 			
+				<div class="row">
+					<div class="form-group col-md-10">					
+						<table  tablename="listaAtividade" id="listaAtividade" noaddbutton="true" nodeletebutton="true" colspan="1" class="table table-condensed table-striped" >
+							<thead>
+								<tr>
+									<th style=" width: 40%;"><label for="listaAtividade">ATIVIDADES DO CONTRATO</label></th>								
+									<th class="text-right" >
+										<span class="fluigicon fluigicon-plus-sign fluigicon-lg" id="addOrcamento" alt='adicionar_linha' title='Adicionar Orçamento' style="cursor: pointer;" onclick="addPaiFilho();"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td style=" width: 60%;">
+										<label for="atv">Atividade</label><span class="obrigatorio" > *</span>
+										<input class="form-group col-md-6"
+												type="zoom"
+												id = "listaAtv"
+												name="listaAtv"
+												data-zoom="{
+													'displayKey':'atividade',
+													'datasetId':'dsCadastroAtividade',
+													'placeholder':'Escolha a atividade',
+													'fields':[
+														{
+														   'field':'atividade',
+														   'label':'Atividade'
+														}
+													]
+												 }"
+										/>
+									</td>
+									<td>	
+										<label for="hh">HH</label><span class="obrigatorio" > *</span>
+										<input type="text"  name="horaHomem" id="horaHomem" class="form-control" placeholder="Digite a HH" mask="9999" onChange="calculaValorTotalHoras()">
+									</td>	
+									<td class="text-right">
+										<span class="fluigicon fluigicon-minus-sign fluigicon-lg" id="removeOrcamento" alt='remover_linha' title='Remover Orçamento' onclick="fnCustomDelete(this)" style="cursor: pointer;" ></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>				
+				</div>
+				<div class="row">	
+					<div class="form-group col-md-3">
+						<div class="form-group has-success">
+							<label for="HorasFluig">Total Horas</label>
+							<input type="text" name="Horas" id="Horas" class="form-control" readonly>
+						</div>
+					</div>
+        		</div>				
+				<div class="row">			
+					<div class="form-group col-md-10">	
+						<h4>Itens Principais</h4>				
+						<table  tablename="listaMaterial" id="listaMaterial" noaddbutton="true" nodeletebutton="true" colspan="1" class="table table-condensed table-striped" >
+							<thead>
+								<tr>
+									<th>Material</th>
+									<th>Quantidade</th>
+									<th>Valor Unitário</th>	
+									<th>Total</th>							
+									<th class="text-center">
+										<span class="fluigicon fluigicon-plus-sign fluigicon-lg" id="addOrcamento" alt='adicionar_linha' title='Adicionar Orçamento' style="cursor: pointer;" onclick="addPaiFilho2();"></span>
+									</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>										
+										<input class="form-control" type="text" id="listaMat" name="listaMat"/>
+									</td>
+									 <td>
+                                       <input id="qtdMat" name="qtdMat" type="number" class="form-control" style="min-width: 130px !important"/>
+                                     </td>
+                                     <td>
+                                          <input id="vlrqtd" name="vlrqtd" type="text" mask="#00,000,000,000,000.00" class="form-control" onchange="eventCalculaValorTotalProjeto()" style="min-width: 130px !important" /> 
+                                     </td>
+                                     <td>
+                                          <input id="vlrtotal" name="vlrtotal" type="text" class="form-control" style="min-width: 130px !important" readonly/>
+                                     </td>																
+									<td class="text-center">
+										<span class="fluigicon fluigicon-minus-sign fluigicon-lg" id="removeOrcamento" alt='remover_linha' title='Remover Orçamento' onclick="fnCustomDelete2(this)" style="cursor: pointer;" ></span>
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>				
+				</div>
+				<div class="row">	
+					<div class="form-group col-md-3">
+    					<div class="form-group has-success">
+							<label for="TotalHoras">Valor Total de Materiais (R$)</label>
+							<input type="text" name="Total" id="Total" class="form-control" readonly> 
+						</div>
+					</div>
+        		</div>		
+			</div>
+		</div>
+		<!-- SWIMLANE: ADM CONTRATO -->
+		<!-- ATOR: CRIAR LISTA DE ATIVIDADES E MATERIAIS -->
+		
+		<!-- SWIMLANE: RESPONSÁVEL TÉCNICO -->
+		<!-- ATOR: RESPONSÁVEL TÉCNICO -->
+		<div class="panel panel-primary" id="responsavel_tecnico">
+			<div class="panel-heading">
+				<h3 class="panel-title">RESPONSÁVEL TÉCNICO</h3>
+			</div>
+			<div class="panel-body">
+				<div class="row">
+					<div class="form-group col-md-8">
+						<label for="nomeResponsavelTecnico">Nome do responsável<span class="obrigatorio" > *</span></label>
+						<input type="text" name="nomeResponsavelTecnico" id="nomeResponsavelTecnico" class="form-control" readonly>
+					</div>
+					<div class="form-group col-md-4">
+						<label for="dataResponsavelTecnico">Data<span class="obrigatorio" > *</span></label>
+						<input type="text" name="dataResponsavelTecnico" id="dataResponsavelTecnico" class="form-control" readonly>
+					</div>							
+				</div>
+				<div class="row">
+					<div class="form-group col-md-12">
+						<label for="obsResponsavelTecnico">Comentários/Observações</label>
+						<textarea rows="4" name="obsResponsavelTecnico" id="obsResponsavelTecnico" class="form-control"></textarea>
+					</div>
+				</div>
+			</div>
+		</div>
+		<!-- SWIMLANE: RESPONSÁVEL TÉCNICO -->
+		<!-- ATOR: RESPONSÁVEL TÉCNICO -->		
+	</form>
+</div>
+</body>
+<script>
+// CALENDARIO FLUIG -->
+//traz a data inicial por padrão	
+	var calendarioPrazoOrc = FLUIGC.calendar('#prazoPass');
+	var calendarioPrazoOrc = FLUIGC.calendar('#prazoOrc');
+	//var calendarioPrazoVendedor = FLUIGC.calendar('#prazoVendedor');
+	var calendarioRegDtInicial = FLUIGC.calendar('#regDtInicial');
+	var calendarioRegExpCompra = FLUIGC.calendar('#regDtExpCompra');	
+	var calendarioRegDtFollowUp = FLUIGC.calendar('#regDtFollowUp');	
+	var calendarioDataComercial = FLUIGC.calendar('#dataComercial');
+	var calendarioDataVendedor = FLUIGC.calendar('#dataVendedor');
+	var calendarioDataSolicitante2 = FLUIGC.calendar('#dataSolicitante2');
+	var calendarioDataAdmin = FLUIGC.calendar('#dataAdmin');
+	var calendarioResponsavelTecnico = FLUIGC.calendar('#dataResponsavelTecnico');
+	var calendarioRevisor = FLUIGC.calendar('#dataRevisor');
+</script>
+
+</html>
